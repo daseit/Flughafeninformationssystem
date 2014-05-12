@@ -1,0 +1,29 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-8 col-sm-8">
+			<ui:include src="functions/register.xhtml" />
+			<ui:include src="functions/opperate.xhtml" />
+			<ui:include src="info/landing.xhtml" />
+		</div>
+		<div class="col-md-4 col-sm-4">
+			<h3>Flughafen-Informationen</h3>
+			<ui:include src="info/queue.xhtml" />
+			<ui:include src="info/runway.xhtml" />
+			<ui:include src="info/parking.xhtml" />
+		</div>
+	</div>
+
+	<hr />
+
+	<footer>
+		<p>© Patricia, Daniel und Frederik 2014</p>
+	</footer>
+</div>
+<!-- /container -->
+
+</html>

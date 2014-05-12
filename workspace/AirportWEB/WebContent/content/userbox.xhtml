@@ -1,0 +1,13 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+     	<h:form class="navbar-form navbar-right" role="form">
+            <div class="form-group">
+            	<span style="color: white; padding-right: 15px;">
+              		Angemeldet als <h:outputText value="#{airportFacadeBean.lotse}" />
+              	</span> 
+            </div>
+            <h:commandButton action="#{airportFacadeBean.doLogout}" value="Abmelden" class="btn btn-danger" />
+          </h:form>
+</html>

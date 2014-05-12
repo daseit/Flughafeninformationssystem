@@ -1,0 +1,25 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Landebahnen</h3>
+	</div>
+	<div class="panel-body">
+		<h:dataTable value="#{airportFacadeBean.runway}" var="aps"
+			id="runway" class="table">
+			<h:column>
+				<f:facet name="header">#</f:facet>
+					   				#{aps.id}
+					   			</h:column>
+			<h:column>
+				<f:facet name="header">Flugzeug</f:facet>
+					   				#{aps.reservedAirplaneId}
+				   				</h:column>
+		</h:dataTable>
+	</div>
+</div>
+
+</html>

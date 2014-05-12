@@ -1,0 +1,54 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h3>Landung anmelden</h3>
+<div class="well">
+	<h:form role="form">
+		<div class="form-group">
+			<label>Flugzeug-Typ</label>
+			<h:inputText id="type" value="#{airportFacadeBean.registerType}"
+				class="form-control" />
+		</div>
+		<div class="form-group">
+			<label>Fluggesellschaft</label>
+			<div class="row">
+				<div class="col-sm-11">
+					<h:selectOneMenu value="#{airportFacadeBean.registerAirline}"
+						class="form-control">
+						<f:selectItems value="#{airportFacadeBean.airlines}" var="ap"
+							itemValue="#{ap.id}" itemLabel="#{ap.id}: #{ap.name}" />
+					</h:selectOneMenu>
+				</div>
+				<div class="coll-sm-1">
+					<button type="button" class="btn btn-default"
+						onclick="toggleDiv('newAirlineForm')">+</button>
+				</div>
+			</div>
+			<div class="well" id="newAirlineForm" style="display: none;">
+				<div class="form-group">
+					<label>Name der neuen Fluggesellschaft</label>
+					<div class="row">
+						<div class="col-sm-9">
+							<h:inputText id="airlineName"
+								value="#{airportFacadeBean.airlineName}" class="form-control" />
+						</div>
+						<div class="col-sm-3">
+							<h:commandButton action="#{airportFacadeBean.createAirline}"
+								value="Speichern" class="btn btn-default" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label>Soll-Landezeit</label>
+			<h:inputText value="#{airportFacadeBean.registerPlannedTime}" class="form-control" />
+		</div>
+		<h:commandButton value="Flugzeug anmelden"
+			action="#{airportFacadeBean.createAirplane}" class="btn btn-default" />
+	</h:form>
+</div>
+
+</html>
