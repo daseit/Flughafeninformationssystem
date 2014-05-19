@@ -18,6 +18,10 @@ public class Airplane implements Serializable {
 	@JoinColumn(name="airline_id")
 	private Airline airline;
 	
+	@ManyToOne
+	@JoinColumn(name="airplane_type")
+	private AirplaneType airplaneType;
+	
 	@OneToOne
 	@JoinColumn(name="runway_id")
 	private Runway runway;
@@ -49,4 +53,30 @@ public class Airplane implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public AirplaneType getAirplaneType() {
+		return airplaneType;
+	}
+
+	public void setAirplaneType(AirplaneType airplaneType) {
+		this.airplaneType = airplaneType;
+	}
+
+	public Runway getRunway() {
+		return runway;
+	}
+
+	public void setRunway(Runway runway) {
+		this.runway = runway;
+	}
+
+	public ParkingPosition getParkingPosition() {
+		return parkingPosition;
+	}
+
+	public void setParkingPosition(ParkingPosition parkingPosition) {
+		this.parkingPosition = parkingPosition;
+	}
+	
+	
 }
