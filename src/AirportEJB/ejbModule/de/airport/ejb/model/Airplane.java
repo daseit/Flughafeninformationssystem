@@ -7,9 +7,9 @@ import javax.persistence.*;
 
 @javax.persistence.Entity (name="airplane")
 public class Airplane implements Serializable {
+	
     @javax.persistence.Id
-    @javax.persistence.GeneratedValue(strategy=GenerationType.AUTO)//, generator="my_airplane_seq_gen")
-//	@SequenceGenerator(name="my_airplane_seq_gen", sequenceName="MY_AIRPLANE_SEQ")
+    @javax.persistence.GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
     
 	private String name;
@@ -21,6 +21,10 @@ public class Airplane implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="airplane_type")
 	private AirplaneType airplaneType;
+	
+	@ManyToOne
+	@JoinColumn(name="flight_controller")
+	private FlightController flightController;
 	
 	@OneToOne
 	@JoinColumn(name="runway_id")
