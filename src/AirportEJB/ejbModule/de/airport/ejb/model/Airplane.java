@@ -81,6 +81,14 @@ public class Airplane implements Serializable {
 	public void setParkingPosition(ParkingPosition parkingPosition) {
 		this.parkingPosition = parkingPosition;
 	}
+
+	public FlightController getFlightController() {
+		return flightController;
+	}
+
+	public void setFlightController(FlightController flightController) {
+		this.flightController = flightController;
+	}
 	
 	
 }
