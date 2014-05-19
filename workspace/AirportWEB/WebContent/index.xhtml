@@ -1,37 +1,28 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core">
 
-<h:head>
-	<link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
-	<link href="css/bootstrap.min.css" rel="stylesheet" />
-	<link href="css/bootstrap.css" rel="stylesheet" />
-	<link href="jumbotron.css" rel="stylesheet" />
-
-</h:head>
-
-<h:body>
-	<ui:include src="content/navbar.xhtml" />
-	<div class="jumbotron">
-		<div class="container"></div>
-	</div>
-	<h:panelGroup rendered="#{airportFacadeBean.loggedIn}">
-		<ui:include src="content/content.xhtml" />
-	</h:panelGroup>
-
-	<p:button outcome="productDetail" value="Bookmark" icon="ui-icon-star">
-		<f:param name="productId" value="10" />
-	</p:button>
-
-
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/bootstrap-datetimepicker.min.js"></script>
-	<script src="js/functions.js"></script>
-
-</h:body>
-
+	<h:head>
+	</h:head>
+	
+	<h:body>
+		<h1>Airport</h1>
+		<h:form>
+			<h:inputText id="name" value="#{airportFacadeBean.name}" />
+			<h:commandButton value="Submit" action="#{airportFacadeBean.createAirplane}"/>
+		</h:form>
+		<p/>
+   		Last name: <h:outputText value="#{airportFacadeBean.name}" />
+   		<p/>
+		<h:dataTable value="#{airportFacadeBean.airplanes}" var="aps" style="border:1px solid black">
+   			<h:column>
+  				<f:facet name="header">Id</f:facet>
+   				#{aps.id}
+   			</h:column>
+   			<h:column>
+   				<f:facet name="header">Name</f:facet>
+   				#{aps.name}
+   			</h:column>
+   		</h:dataTable>
+	</h:body>
 </html>
