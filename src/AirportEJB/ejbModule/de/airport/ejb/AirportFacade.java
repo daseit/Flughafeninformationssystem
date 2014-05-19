@@ -20,8 +20,6 @@ public class AirportFacade {
 
 	
 	
-	
-	/*
 	public void createAirplane(String name) {
 		Airplane airplane = new Airplane();
 		airplane.setName(name);
@@ -32,5 +30,5 @@ public class AirportFacade {
 		Query query = em.createQuery("select e from airplane e order by e.name");
 		return query.getResultList();
 	}
-	*/
+	
 }
