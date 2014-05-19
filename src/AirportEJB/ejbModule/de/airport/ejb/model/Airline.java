@@ -11,9 +11,9 @@ import javax.persistence.*;
 public class Airline implements Serializable {
 	
 	@javax.persistence.Id
-	@javax.persistence.GeneratedValue(strategy=GenerationType.AUTO)//, generator="my_airline_seq_gen")
-//	@SequenceGenerator(name="my_airline_seq_gen", sequenceName="MY_AIRLINE_SEQ")
+	@javax.persistence.GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
+	
 	private String name;
 	
 	@OneToMany(mappedBy="airline")
