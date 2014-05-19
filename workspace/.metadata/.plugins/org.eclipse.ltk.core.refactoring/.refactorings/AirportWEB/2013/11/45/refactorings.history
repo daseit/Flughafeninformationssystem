@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename type &apos;de.airport.gui.AirportfacadeBean&apos; to &apos;AirportFacadeBean&apos;&#x0D;&#x0A;- Original project: &apos;AirportWEB&apos;&#x0D;&#x0A;- Original element: &apos;de.airport.gui.AirportfacadeBean&apos;&#x0D;&#x0A;- Renamed element: &apos;de.airport.gui.AirportFacadeBean&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;AirportfacadeBean&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;de.airport.gui{AirportfacadeBean.java[AirportfacadeBean" matchStrategy="1" name="AirportFacadeBean" qualified="false" references="true" similarDeclarations="false" stamp="1383552436662" textual="false" version="1.0"/>
-</session>
