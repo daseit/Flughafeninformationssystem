@@ -12,8 +12,7 @@ import javax.persistence.Transient;
 public class Runway {
 	
 	@javax.persistence.Id
-    @javax.persistence.GeneratedValue(strategy=GenerationType.AUTO)//, generator="my_runway_seq_gen")
-//	@SequenceGenerator(name="my_runway_seq_gen", sequenceName="MY_RUNWAY_SEQ")
+    @javax.persistence.GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
 	@OneToOne
