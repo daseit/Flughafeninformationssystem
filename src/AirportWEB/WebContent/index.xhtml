@@ -1,14 +1,239 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
 
-	<h:head>
-	</h:head>
-	
-	<h:body>
-		<h1>Airport</h1>
-		<h:form>
-		</h:form>
-		
-	</h:body>
+
+
+<h:head>
+	<link href="/airport/resources/bootstrap.min.css" rel="stylesheet"></link>
+	<link href="/airport/resources/bootstrap-theme.min.css"
+		rel="stylesheet"></link>
+	<link href="/airport/resources/custom-template.css" rel="stylesheet" />
+
+	<meta charset="utf-8"></meta>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+	<meta name="description" content=""></meta>
+	<meta name="author" content=""></meta>
+
+
+</h:head>
+
+<h:body>
+
+
+
+	<div class="container">
+
+		<div class="row">
+			<div class="col-md-10">
+				<h1>Flughafeninformationswerkzeugwebapplikationssystem</h1>
+			</div>
+			<div class="col-md-2">
+				<h6>
+					Angemeldet als:<br />Gerhard Schulz
+				</h6>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+
+
+
+
+
+
+
+
+
+
+		<div class="col-sm-8">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">Flugzeugdetails</h3>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-3">.col-md-3</div>
+						<div class="col-md-6">.col-md-6</div>
+						<div class="col-md-3">.col-md-3</div>
+					</div>
+
+					<div class="row">
+						<form class="form-horizontal" role="form">
+							<div class="form-group">
+
+								<label for="inputFlightName" class="col-sm-4 control-label">Flugname</label>
+
+								<div class="col-sm-4">
+									<input class="form-control" id="inputFlightName" placeholder="" />
+								</div>
+
+							</div>
+						</form>
+					</div>
+					<div class="row">
+						<form class="form-horizontal" role="form">
+							<div class="form-group">
+
+								<label for="inputFlightName" class="col-sm-4 control-label">Flugzeugtyp</label>
+
+								<div class="col-sm-4">
+									<select class="form-control" id="selectAirplaneType">
+										<option value="one">One</option>
+										<option value="two">Two</option>
+										<option value="three">Three</option>
+										<option value="four">Four</option>
+										<option value="five">Five</option>
+									</select>
+								</div>
+								<button type="submit" id="addAirplaneType"
+									class="col-sm-1 btn btn-default">+</button>
+							</div>
+						</form>
+					</div>
+
+					<div class="row">
+						<form class="form-horizontal" role="form">
+							<div class="form-group">
+
+								<label for="inputFlightName" class="col-sm-4 control-label">Luftfahrtgesellschaft</label>
+
+								<div class="col-sm-4">
+									<select class="form-control" id="selectAirline">
+										<option value="one">One</option>
+										<option value="two">Two</option>
+										<option value="three">Three</option>
+										<option value="four">Four</option>
+										<option value="five">Five</option>
+									</select>
+								</div>
+
+
+								<!-- Button trigger modal -->
+								<button class="col-sm-1 btn btn-default" data-toggle="modal"
+									data-target="#addAirlinePopover">+</button>
+
+								<!-- Modal -->
+								<div class="modal fade" id="addAirlinePopover" tabindex="-1"
+									role="dialog" aria-labelledby="mymodal" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+
+												<h4 class="modal-title" id="myModalLabel">Luftfahrtgesellschaft
+													hinzufügen</h4>
+											</div>
+											<div class="modal-body">
+
+
+												<div class="row">
+													<form class="form-horizontal" role="form">
+														<div class="form-group">
+															<label for="inputAirlineName"
+																class="col-sm-6 control-label">Name</label>
+
+															<div class="col-sm-6">
+																<input class="form-control" id="inputAirlineName"
+																	placeholder="" />
+															</div>
+														</div>
+													</form>
+												</div>
+
+												<div class="row">
+													<form class="form-horizontal" role="form">
+														<div class="form-group">
+															<label for="inputAirlineStreet"
+																class="col-sm-6 control-label">Straße</label>
+
+															<div class="col-sm-6">
+																<input class="form-control" id="inputAirlineStreet"
+																	placeholder="" />
+															</div>
+														</div>
+													</form>
+												</div>
+												<div class="row">
+													<form class="form-horizontal" role="form">
+														<div class="form-group">
+															<label for="inputAirlineCity"
+																class="col-sm-6 control-label">Stadt</label>
+
+															<div class="col-sm-6">
+																<input class="form-control" id="inputAirlineCity"
+																	placeholder="" />
+															</div>
+														</div>
+													</form>
+												</div>
+												<div class="row">
+													<form class="form-horizontal" role="form">
+														<div class="form-group">
+															<label for="inputAirlineCountry"
+																class="col-sm-6 control-label">Land</label>
+
+															<div class="col-sm-6">
+																<input class="form-control" id="inputAirlineCountry"
+																	placeholder="" />
+															</div>
+														</div>
+													</form>
+												</div>
+
+
+
+
+
+
+
+
+
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default"
+													data-dismiss="modal">Abbrechen</button>
+												<button type="button" class="btn btn-primary">Bestätigen</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<!--  Datepicker -->
+
+
+							</div>
+						</form>
+					</div>
+					<div class="col-sm-4">
+						<div id="datetimepicker1" class="input-append date">
+							<input data-format="dd/MM/yyyy hh:mm:ss" type="text"></input> <span
+								class="add-on"> <i data-time-icon="icon-time"
+								data-date-icon="icon-calendar"> </i>
+							</span>
+						</div>
+					</div>
+				
+				</div>
+
+			</div>
+
+
+
+
+
+
+		</div>
+	</div>
+
+	<!-- /.container -->
+
+
+	<script src="/airport/resources/jquery-2.1.1.min.js"></script>
+	<script src="/airport/resources/bootstrap.min.js"></script>
+	<script src="/airport/resources/bootstrap-datetimepicker.min.js"></script>
+
+
+</h:body>
 </html>
