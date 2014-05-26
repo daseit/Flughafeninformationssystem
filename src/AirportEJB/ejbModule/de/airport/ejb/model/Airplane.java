@@ -34,6 +34,10 @@ public class Airplane implements Serializable {
 	@JoinColumn(name="parkingPosition_id")
 	private ParkingPosition parkingPosition;
 	
+	@OneToOne
+	@JoinColumn(name="flight_id")
+	private Flight flight;
+	
 	public Airline getAirline() {
 		return airline;
 	}
@@ -44,10 +48,6 @@ public class Airplane implements Serializable {
 
 	public int getId() {
 		return id;
-	}
-	
-	public void setId(int id) {
-		this.id = id;
 	}
 	
 	public String getName() {
@@ -88,6 +88,14 @@ public class Airplane implements Serializable {
 
 	public void setFlightController(FlightController flightController) {
 		this.flightController = flightController;
+	}
+
+	public Flight getFlight() {
+		return flight;
+	}
+
+	public void setFlight(Flight flight) {
+		this.flight = flight;
 	}
 	
 	
