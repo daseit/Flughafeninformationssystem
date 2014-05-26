@@ -17,4 +17,16 @@ public class Account implements Serializable {
 	@JoinColumn(name="airline_id")
 	private Airline airline;
 
+	public Airline getAirline() {
+		return airline;
+	}
+
+	public void setAirline(Airline airline) {
+		this.airline = airline;
+	}
+
+	public int getId() {
+		return id;
+	}
+	
 }

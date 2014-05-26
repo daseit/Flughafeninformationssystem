@@ -52,6 +52,14 @@ public class Airline implements Serializable {
 	public void setAdresse(String adresse) {
 		this.adresse = adresse;
 	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
 	
 	
 
