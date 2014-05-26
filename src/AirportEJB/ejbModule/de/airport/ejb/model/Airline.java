@@ -16,7 +16,7 @@ public class Airline implements Serializable {
 	
 	private String name;
 	
-	private String adresse;
+	private String adress;
 	
 	@OneToOne
 	@JoinColumn(name="account_id")
@@ -45,12 +45,12 @@ public class Airline implements Serializable {
 		this.name = name;
 	}
 
-	public String getAdresse() {
-		return adresse;
+	public String getAdress() {
+		return adress;
 	}
 
-	public void setAdresse(String adresse) {
-		this.adresse = adresse;
+	public void setAdress(String adress) {
+		this.adress = adress;
 	}
 
 	public Account getAccount() {
