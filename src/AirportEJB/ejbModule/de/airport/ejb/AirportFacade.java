@@ -1,5 +1,6 @@
 package de.airport.ejb;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -13,39 +14,112 @@ import de.airport.ejb.model.Airline;
 import de.airport.ejb.model.Airplane;
 import de.airport.ejb.model.AirplaneType;
 import de.airport.ejb.model.FlightController;
+import de.airport.ejb.model.Runway;
 
 @Stateless
 @LocalBean
 public class AirportFacade {
-
-	private List<Airline> airlines;
 	
 	// DB access
 	@PersistenceContext(unitName = "airport")
 	private EntityManager em;
 
+	// airplain
 	/**
 	 * Add a new airplane to the system. (Requirement 11400)
 	 * @author Benjamin Rupp <beruit01@hs-esslingen.de>
-	 * @param type AirplaneType of the new airplane.
-	 * @param airline Airline of the new airplane.
-	 * @param controller Flight controller of the new airplane.
+	 * @param airplaneTypeId Unique airplane identifier.
+	 * @param airlineId Unique airline identifier.
+	 * @param flightControllerId Unique flight controller identifier.
 	 */
-	public void addAirplane(AirplaneType type, Airline airline, FlightController controller) {
+	public void addAirplane(int airplaneTypeId, int airlineId, int flightControllerId, String name) {
 		
 		Airplane airplane = new Airplane();
+		airplane.setState(Airplane.State.IN_APPROACH);
 		
-		airplane.setAirline(airline);
-		airplane.setAirplaneType(type);
-		airplane.setFlightController(controller);
 		
+		// get objects by id
+		Query qAirplaneType = em.createQuery("select e from airplaneType e where e.id = '" + airplaneTypeId + "'");
+		Query qAirline = em.createQuery("select e from airline e where e.id = '" + airlineId + "'");
+		Query qFlightController = em.createQuery("select e from flightController e where e.id = '" + flightControllerId + "'");
+		
+		// airplane
+		if( qAirplaneType.getResultList().size() > 0) {
+			AirplaneType airplaneType = (AirplaneType) qAirplaneType.getResultList().get(0);
+			airplane.setAirplaneType(airplaneType);
+		}else{
+			System.out.println("[AirportFacade][addAirplane] Error: No airplane type found! (airplane type id: " + airplaneTypeId + ")");
+			return;
+		}
+		
+		// airline
+		if( qAirline.getResultList().size() > 0) {
+			Airline airline = (Airline) qAirline.getResultList().get(0);
+			airplane.setAirline(airline);
+		}else{
+			System.out.println("[AirportFacade][addAirplane] Error: No airline found! (airline id: " + airlineId + ")");
+			return;
+		}
+		
+		// flight controller
+		if( qFlightController.getResultList().size() > 0) {			
+			FlightController flightController = (FlightController) qFlightController.getResultList().get(0);
+			airplane.setFlightController(flightController);
+		}else{
+			System.out.println("[AirportFacade][addAirplane] Error: No flight controller found! (flight controller id: " + flightControllerId + ")");
+			return;
+		}
+		
+		// name
+		if( !name.isEmpty() ) {
+			airplane.setName(name);
+		}else{
+			airplane.setName("no name");
+		}
+		
+		
+		// write to database
 		em.persist(airplane);
 		
-		System.out.println("[AirportFacade] Added new airplane of type " + airplane.getAirplaneType() +
+		System.out.println("[AirportFacade][addAirplane] Added new airplane " + airplane.getName() +
 				" to airline " + airplane.getAirline().getName());
 		
 	}
 	
+	/**
+	 * Print current airplanes to console.
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 */
+	public void printAirplanes() {
+		
+		Query q = em.createQuery("select e from airplane e order by e.id");
+		
+		System.out.println("\nAirplanes\n--------------------------------");
+		System.out.println("id \tname \tairline \ttype \t\tcontroller \trunway \tparking \tstatus");
+		
+		for(Airplane a : (List<Airplane>) q.getResultList()) {
+			
+			System.out.print("#" + a.getId() + "\t" + a.getName() + "\t" + a.getAirline().getName() + "\t" + a.getAirplaneType().getName() + "\t" +
+								a.getFlightController().getId());
+			
+			if( a.getRunway() == null ) {
+				System.out.print("\t-");
+			}else{
+				System.out.print("\t" + a.getRunway().getId());
+			}
+			
+			if( a.getParkingPosition() == null ) {
+				System.out.print("\t-");
+			}else{
+				System.out.print("\t" + a.getParkingPosition().getId());
+			}
+				
+			System.out.println("\t\t" + a.getState() + "\n");
+			
+		}
+	}
+	
+	// airline
 	/**
 	 * Add a new airline to the system. (Requirement 11405)
 	 * @author Benjamin Rupp <beruit01@hs-esslingen.de>
@@ -75,17 +149,166 @@ public class AirportFacade {
 	
 	}
 	
+	/**
+	 * Print current airlines to console.
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 */
+	public void printAirlines() {
+		
+		Query q = em.createQuery("select e from airline e order by e.id");
+		
+		System.out.println("\nAirlines\n--------------------------------");
+		
+		for(Airline a : (List<Airline>) q.getResultList()) {
+			
+			System.out.println("#" + a.getId() + "\t" + a.getName() + "\t" + a.getAddress());
+			
+		}
+	}
 	
-	/*
-	public void createAirplane(String name) {
-		Airplane airplane = new Airplane();
-		airplane.setName(name);
-		em.persist(airplane);
+	// airplain type
+	/**
+	 * Add a new airplane type to the system.
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 * @param name Name of airplane type.
+	 */
+	public void addAirplaneType(String name) {
+		
+		if(name.isEmpty()) {
+			return;
+		}
+		
+		AirplaneType airplaneType = new AirplaneType();
+		
+		airplaneType.setName(name);
+		
+		em.persist(airplaneType);
+		
 	}
+	
+	/**
+	 * Print current airplane types to console.
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 */
+	public void printAirplaneTypes() {
+		
+		System.out.println("\nAirplane types\n--------------------------------");
 
-	public List<Airplane> getAirplanes() {
-		Query query = em.createQuery("select e from airplane e order by e.name");
-		return query.getResultList();
+		Query q = em.createQuery("select e from airplaneType e order by e.id");
+		
+		for(AirplaneType at : (List<AirplaneType>) q.getResultList()) {
+			
+			System.out.println("#" + at.getId() + "\t" + at.getName());
+			
+		}
 	}
-	*/
+	
+	// flight controller
+	/**
+	 * Add new flight controller to the system.
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 * @param firstname Firstname.
+	 * @param lastname Lastname.
+	 * @param login User name for login.
+	 * @param password Password for login.
+	 */
+	public void addFlightController(String firstname, String lastname, String login, String password) {
+		
+		FlightController flightController = new FlightController();
+		
+		flightController.setForname(firstname);
+		flightController.setSurname(lastname);
+		flightController.setLoginname(login);
+		flightController.setPassword(password);
+		
+		em.persist(flightController);
+	}
+	
+	/**
+	 * Print current flight controller to console.
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 */
+	public void printFlightController() {
+		
+		System.out.println("\nFlight controller\n--------------------------------");
+
+		Query q = em.createQuery("select e from flightController e order by e.id");
+		
+		for(FlightController f : (List<FlightController>) q.getResultList()) {
+			
+			System.out.println("#" + f.getId() + "\t" + f.getForname() + " " + f.getSurname());
+			
+		}
+	}
+	
+	// runways
+	/**
+	 * Add 4 runways to the database.
+	 * @author Benjamin Rupp <beruit01@hs-esslingen.de>
+	 */
+	public void addRunways() {
+		
+		for(int i=0; i<4; i++) {
+			
+			em.persist( new Runway() );
+			
+		}
+	}
+	
+	/**
+	 * Return all runways objects from the database. (Requirement 11410)
+	 * @author Benjamin Rupp <beruit01@hs-esslingen.de>
+	 * @return List with all runway objects stored in the database.
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Runway> getRunways() {
+		
+		Query query = em.createQuery("select e from runway e order by e.id");
+		return query.getResultList();
+		
+	}
+	
+	/**
+	 * Print current runway status to console.
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 * @return Empty string for JSF command button.
+	 */
+	public String printRunways() {
+		
+		List<Runway> list = getRunways();
+		
+		System.out.println("\nRunway status\n--------------------");
+		for(Runway r : list) {
+			System.out.print("#" + r.getId() + "\t" +
+						r.getReservationTimeStart() + "\t" +
+						r.getReservationTimeEnd() + "\t");
+			
+			if(r.getAirplane() == null) System.out.print("-\n");
+			else System.out.print(r.getAirplane().getName() + "\n");
+		}
+		
+		return "";
+	}
+	
+	/**
+	 * Reserve a runway for landing or start of an airplane. (Requirement 11415)
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 * @param runwayId Unique runway identifier.
+	 * @param reservationStartTime Reservation start time.
+	 * @param airplaneId Unique airplane identifier.
+	 */
+	public void reserveRunway(int runwayId, Date reservationStartTime, int airplaneId) {
+		
+		// modify runway object in database
+		Query qRunway = em.createQuery("update runway set airplane = '" + airplaneId + "'" +
+							", reservationTimeStart = '" + reservationStartTime + "'" +
+							" where id = '" + runwayId + "'");
+		int updateCnt = qRunway.executeUpdate();
+		
+		if(updateCnt <= 0) {
+			System.out.println("[AirportFacade][reserveRunway] Error: Reserving runway " +
+								runwayId + " failed! No database update.");
+		}
+		
+	}
 }
