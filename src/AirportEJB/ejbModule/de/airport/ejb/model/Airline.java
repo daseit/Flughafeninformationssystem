@@ -2,14 +2,18 @@ package de.airport.ejb.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.*;
 
 @javax.persistence.Entity (name="airline")
 public class Airline implements Serializable {
-	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2101775176751972529L;
+
 	@javax.persistence.Id
 	@javax.persistence.GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;

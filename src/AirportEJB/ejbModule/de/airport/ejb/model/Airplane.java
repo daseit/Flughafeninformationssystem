@@ -8,7 +8,12 @@ import javax.persistence.*;
 @javax.persistence.Entity (name="airplane")
 public class Airplane implements Serializable {
 	
-    @javax.persistence.Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5850955168988007782L;
+
+	@javax.persistence.Id
     @javax.persistence.GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
     

@@ -1,5 +1,6 @@
 package de.airport.ejb.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
 
 @javax.persistence.Entity (name="flightController")
-public class FlightController {
+public class FlightController implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9172997910426661624L;
 
 	@javax.persistence.Id
 	@javax.persistence.GeneratedValue(strategy=GenerationType.AUTO)

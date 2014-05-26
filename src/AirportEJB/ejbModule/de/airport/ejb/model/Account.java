@@ -8,7 +8,12 @@ import javax.persistence.OneToOne;
 
 @javax.persistence.Entity (name="account")
 public class Account implements Serializable {
-	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4561190208886549787L;
+
 	@javax.persistence.Id
 	@javax.persistence.GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;

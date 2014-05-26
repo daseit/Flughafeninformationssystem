@@ -9,6 +9,11 @@ import javax.persistence.OneToOne;
 @javax.persistence.Entity (name="flight")
 public class Flight implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5767305235804139200L;
+
 	@javax.persistence.Id
     @javax.persistence.GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
