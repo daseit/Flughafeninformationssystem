@@ -2,6 +2,7 @@ package de.airport.ejb.model;
 
 import javax.persistence.GenerationType;
 
+@javax.persistence.Entity (name="airplaneType")
 public class AirplaneType {
 	
 	@javax.persistence.Id

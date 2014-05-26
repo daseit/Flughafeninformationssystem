@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
 
+@javax.persistence.Entity (name="flightController")
 public class FlightController {
 
 	@javax.persistence.Id
