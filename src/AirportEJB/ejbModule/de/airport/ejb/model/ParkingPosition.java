@@ -1,15 +1,20 @@
 package de.airport.ejb.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.*;
 
 @javax.persistence.Entity (name="parking_position")
-public class ParkingPosition {
+public class ParkingPosition implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7546798097495925516L;
+
 	@javax.persistence.Id
-    @javax.persistence.GeneratedValue(strategy=GenerationType.AUTO)//, generator="my_parkingPosition_seq_gen")
-//	@SequenceGenerator(name="my_parkingPosition_seq_gen", sequenceName="MY_ParkingPosition_SEQ")
+    @javax.persistence.GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
 	@OneToOne

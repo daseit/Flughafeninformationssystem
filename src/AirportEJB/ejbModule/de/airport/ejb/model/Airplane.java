@@ -8,7 +8,12 @@ import javax.persistence.*;
 @javax.persistence.Entity (name="airplane")
 public class Airplane implements Serializable {
 	
-    @javax.persistence.Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5850955168988007782L;
+
+	@javax.persistence.Id
     @javax.persistence.GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
     
@@ -34,6 +39,10 @@ public class Airplane implements Serializable {
 	@JoinColumn(name="parkingPosition_id")
 	private ParkingPosition parkingPosition;
 	
+	@OneToOne
+	@JoinColumn(name="flight_id")
+	private Flight flight;
+	
 	public Airline getAirline() {
 		return airline;
 	}
@@ -44,10 +53,6 @@ public class Airplane implements Serializable {
 
 	public int getId() {
 		return id;
-	}
-	
-	public void setId(int id) {
-		this.id = id;
 	}
 	
 	public String getName() {
@@ -88,6 +93,14 @@ public class Airplane implements Serializable {
 
 	public void setFlightController(FlightController flightController) {
 		this.flightController = flightController;
+	}
+
+	public Flight getFlight() {
+		return flight;
+	}
+
+	public void setFlight(Flight flight) {
+		this.flight = flight;
 	}
 	
 	

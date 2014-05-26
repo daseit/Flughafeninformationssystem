@@ -2,19 +2,29 @@ package de.airport.ejb.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.*;
 
 @javax.persistence.Entity (name="airline")
 public class Airline implements Serializable {
-	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2101775176751972529L;
+
 	@javax.persistence.Id
 	@javax.persistence.GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
 	private String name;
+	
+	private String address;
+	
+	@OneToOne
+	@JoinColumn(name="account_id")
+	private Account account;
 	
 	@OneToMany(mappedBy="airline")
 	private List<Airplane> airplanes = new ArrayList<Airplane>();
@@ -38,5 +48,23 @@ public class Airline implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+	
+	
 
 }

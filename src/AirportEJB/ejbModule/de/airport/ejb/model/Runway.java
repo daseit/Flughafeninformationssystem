@@ -1,16 +1,20 @@
 package de.airport.ejb.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Transient;
 
 @javax.persistence.Entity (name="runway")
-public class Runway {
+public class Runway implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8333183316866584847L;
+
 	@javax.persistence.Id
     @javax.persistence.GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
