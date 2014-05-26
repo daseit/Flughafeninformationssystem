@@ -43,6 +43,9 @@ public class Airplane implements Serializable {
 	@JoinColumn(name="flight_id")
 	private Flight flight;
 	
+	public enum State { IN_QUEUE, IN_APPROACH, PARKING }
+	private State state;
+	
 	public Airline getAirline() {
 		return airline;
 	}
@@ -102,6 +105,13 @@ public class Airplane implements Serializable {
 	public void setFlight(Flight flight) {
 		this.flight = flight;
 	}
-	
+
+	public State getState() {
+		return state;
+	}
+
+	public void setState(State state) {
+		this.state = state;
+	}
 	
 }

@@ -28,10 +28,6 @@ public class ParkingPosition implements Serializable {
 		return id;
 	}
 	
-	public void setId(int id) {
-		this.id = id;
-	}
-	
 	public boolean isReserved() {
 		return airplane != null;
 	}

@@ -18,6 +18,12 @@ public class Account implements Serializable {
 	@javax.persistence.GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
+	private String name;
+	
+	private String iban;
+	
+	private String bic;
+	
 	@OneToOne
 	@JoinColumn(name="airline_id")
 	private Airline airline;
@@ -33,5 +39,31 @@ public class Account implements Serializable {
 	public int getId() {
 		return id;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getIban() {
+		return iban;
+	}
+
+	public void setIban(String iban) {
+		this.iban = iban;
+	}
+
+	public String getBic() {
+		return bic;
+	}
+
+	public void setBic(String bic) {
+		this.bic = bic;
+	}
+	
+	
 	
 }
