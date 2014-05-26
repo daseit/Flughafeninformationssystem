@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-@javax.persistence.Entity (name="airline")
+@javax.persistence.Entity (name="account")
 public class Account implements Serializable {
 	
 	@javax.persistence.Id
