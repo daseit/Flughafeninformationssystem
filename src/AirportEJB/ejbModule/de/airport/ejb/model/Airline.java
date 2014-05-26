@@ -16,6 +16,12 @@ public class Airline implements Serializable {
 	
 	private String name;
 	
+	private String adresse;
+	
+	@OneToOne
+	@JoinColumn(name="account_id")
+	private Account account;
+	
 	@OneToMany(mappedBy="airline")
 	private List<Airplane> airplanes = new ArrayList<Airplane>();
 	
@@ -38,5 +44,15 @@ public class Airline implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public String getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
+	}
+	
+	
 
 }
