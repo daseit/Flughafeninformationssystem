@@ -1,7 +1,12 @@
 .form-group label {
-  text-align: left !important;
-  
+	text-align: left !important;
 }
+
 .row {
 	padding-left: 10px !important;
+	padding-right: 10px !important;
+}
+
+.control-label {
+	text-align: left !important;
 }

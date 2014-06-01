@@ -9,6 +9,11 @@
 	<link href="/airport/resources/bootstrap-theme.min.css"
 		rel="stylesheet"></link>
 	<link href="/airport/resources/custom-template.css" rel="stylesheet" />
+	<link
+		href="/airport/resources/Date_Time_Picker/jquery-clockpicker.min.css"
+		rel="stylesheet" />
+	<link href="/airport/resources/Date_Time_Picker/datepicker.css"
+		rel="stylesheet" />
 
 	<meta charset="utf-8"></meta>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
@@ -54,11 +59,6 @@
 					<h3 class="panel-title">Flugzeugdetails</h3>
 				</div>
 				<div class="panel-body">
-					<div class="row">
-						<div class="col-md-3">.col-md-3</div>
-						<div class="col-md-6">.col-md-6</div>
-						<div class="col-md-3">.col-md-3</div>
-					</div>
 
 					<div class="row">
 						<form class="form-horizontal" role="form">
@@ -95,6 +95,7 @@
 					</div>
 
 					<div class="row">
+
 						<form class="form-horizontal" role="form">
 							<div class="form-group">
 
@@ -111,19 +112,22 @@
 								</div>
 
 
+
+
 								<!-- Button trigger modal -->
 								<button class="col-sm-1 btn btn-default" data-toggle="modal"
 									data-target="#addAirlinePopover">+</button>
 
+
 								<!-- Modal -->
 								<div class="modal fade" id="addAirlinePopover" tabindex="-1"
-									role="dialog" aria-labelledby="mymodal" aria-hidden="true">
+									role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 									<div class="modal-dialog">
 										<div class="modal-content">
 											<div class="modal-header">
-
-												<h4 class="modal-title" id="myModalLabel">Luftfahrtgesellschaft
-													hinzufügen</h4>
+												<button type="button" class="close" data-dismiss="modal"
+													aria-hidden="true">;</button>
+												<h4 class="modal-title" id="myModalLabel">Flughafeddn</h4>
 											</div>
 											<div class="modal-body">
 
@@ -184,12 +188,6 @@
 
 
 
-
-
-
-
-
-
 											</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-default"
@@ -200,22 +198,56 @@
 									</div>
 								</div>
 
-								<!--  Datepicker -->
 
+
+							</div>
+
+
+						</form>
+
+					</div>
+
+
+					<div class="row">
+						<form class="form-horizontal" role="form">
+							<div class="form-group">
+
+								<label class="col-sm-4 control-label">Landung planen:</label>
+
+								<div class="container col-sm-2">
+									<div class="input-append date datepicker no-padding"
+										data-date-format="dd.mm.yyyy">
+										<input class="input-medium" size="6" type="text" /><span
+											class="add-on"><i class="icon-th"></i></span>
+									</div>
+								</div>
+
+								<div class="container col-sm-2">
+
+									<div class="input-group clockpicker">
+										<input type="text" class="form-control" value="18:00" /> <span
+											class="input-group-addon"> <span
+											class="glyphicon glyphicon-time"></span>
+										</span>
+									</div>
+
+								</div>
 
 							</div>
 						</form>
 					</div>
-					<div class="col-sm-4">
-						<div id="datetimepicker1" class="input-append date">
-							<input data-format="dd/MM/yyyy hh:mm:ss" type="text"></input> <span
-								class="add-on"> <i data-time-icon="icon-time"
-								data-date-icon="icon-calendar"> </i>
-							</span>
-						</div>
+
+
+
+					<div id="buttons" style="float: right">
+
+
+						<button class="btn btn-default" data-toggle="" data-target="#">Flugzeug
+							hinzufügen</button>
 					</div>
-				
+
 				</div>
+
 
 			</div>
 
@@ -223,17 +255,150 @@
 
 
 
-
+			<!-- /.container -->
 		</div>
-	</div>
 
-	<!-- /.container -->
+		<!-- Warteschleife Container -->
+		<div class="col-sm-3">
+
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">Warteschleife</h3>
+				</div>
+				<div class="panel-body"></div>
+			</div>
+		</div>
+
+
+		<!-- Flugzeug zuweisen Container -->
+		<div class="col-sm-8">
+
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">Flugzeug zuweisen</h3>
+				</div>
+				<div class="panel-body">
+
+					<form class="form-horizontal" role="form">
+						<div class="form-group">
+
+							<label for="selectFlightName" class="col-sm-4 control-label">Flug</label>
+
+							<div class="col-sm-4">
+								<select class="form-control" id="selectFlightName">
+									<option value="TDD-224">One</option>
+									<option value="BC-552">Two</option>
+									<option value="three">Three</option>
+									<option value="four">Four</option>
+									<option value="five">Five</option>
+								</select>
+							</div>
+
+						</div>
+					</form>
+
+					<form class="form-horizontal" role="form">
+						<div class="form-group">
+
+							<label for="selectRunway" class="col-sm-4 control-label">Landebahn</label>
+
+							<div class="col-sm-4">
+								<select class="form-control" id="selectRunway">
+									<option value="one">One</option>
+									<option value="two">Two</option>
+									<option value="three">Three</option>
+									<option value="four">Four</option>
+									<option value="five">Five</option>
+								</select>
+							</div>
+
+						</div>
+					</form>
+
+					<form class="form-horizontal" role="form">
+						<div class="form-group">
+
+							<label for="selecParkingPosition" class="col-sm-4 control-label">Parkposition</label>
+
+							<div class="col-sm-4">
+								<select class="form-control" id="selecParkingPosition">
+									<option value="one">One</option>
+									<option value="two">Two</option>
+									<option value="three">Three</option>
+									<option value="four">Four</option>
+
+								</select>
+							</div>
+
+						</div>
+					</form>
+					<form class="form-horizontal" role="form">
+						<div class="form-group row">
+							<div id="buttons" style="float: left">
+								<button class="btn btn-default" data-toggle="" data-target="#">Landung
+									verweigern</button>
+							</div>
+
+							<div id="buttons" style="float: right">
+								<button class="btn btn-default" data-toggle="" data-target="#">Landung
+									bestätigen</button>
+							</div>
+
+						</div>
+					</form>
+
+
+				</div>
+			</div>
+		</div>
+
+		<!-- Landebahnen Container -->
+		<div class="col-sm-3">
+
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">Landebahnen</h3>
+				</div>
+				<div class="panel-body"></div>
+			</div>
+		</div>
+
+		<!-- Parkpositionen Container -->
+		<div class="col-sm-3">
+
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">Parkpositionen</h3>
+				</div>
+				<div class="panel-body"></div>
+			</div>
+		</div>
+
+
+
+		<!-- Aktuelle Flüge Container -->
+		<div class="col-sm-8">
+
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">Flüge</h3>
+				</div>
+				<div class="panel-body"></div>
+			</div>
+		</div>
+
+
+	</div>
 
 
 	<script src="/airport/resources/jquery-2.1.1.min.js"></script>
 	<script src="/airport/resources/bootstrap.min.js"></script>
-	<script src="/airport/resources/bootstrap-datetimepicker.min.js"></script>
-
-
+	<script
+		src="/airport/resources/Date_Time_Picker/jquery-clockpicker.min.js"></script>
+	<script src="/airport/resources/Date_Time_Picker/customClockpicker.js"></script>
+	<script
+		src="/airport/resources/Date_Time_Picker/bootstrap-datepicker.js"></script>
+	<script
+		src="/airport/resources/Date_Time_Picker/bootstrap-datepicker.de.js"></script>
 </h:body>
 </html>
