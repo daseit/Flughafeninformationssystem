@@ -1,0 +1,83 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:head>
+	</h:head>
+	
+	<h:body>
+		<h1>Benis Spielwiese :)</h1>
+		
+		<h:form>
+			<h:commandButton action="#{airportFacadeBean.init}" value="init demo" />
+			<h:commandButton action="#{airportFacadeBean.printInfo}" value="print info" />
+		</h:form>
+		<hr/>
+		
+		<b>Airline</b>
+		<h:form>
+			Name: <h:inputText value="#{airportFacadeBean.airlineName}"/>
+			Adresse: <h:inputText value="#{airportFacadeBean.airlineAddress}"/>
+			<h:commandButton action="#{airportFacadeBean.addAirline}" value="add airline"/>
+		</h:form>
+		
+		<b>Airplane</b>
+		<h:form>
+			Airplane type id: <h:inputText value="#{airportFacadeBean.airplaneTypeId}"/>
+			Airline id: <h:inputText value="#{airportFacadeBean.airlineId}"/>
+			Flight controller id: <h:inputText value="#{airportFacadeBean.flightControllerId}"/>
+			Name: <h:inputText value="#{airportFacadeBean.airplaneName}"/>
+			<h:commandButton action="#{airportFacadeBean.addAirplane}" value="add airplane"/>
+		</h:form>
+		
+		<b>Reserve Runway</b>
+		<h:form>
+			
+			Runway Id: <h:inputText value="#{airportFacadeBean.runwayId}"/>
+			Airplane Id: <h:inputText value="#{airportFacadeBean.runwayAirplaneId}"/>
+			Reservation start date:
+			<h:inputText value="#{airportFacadeBean.runwayReservationStartDate}" />
+			<h:commandButton action="#{airportFacadeBean.reserveRunway}" value="reserve runway" />
+			
+		</h:form>
+		
+		<b>Reserve Parking Position</b>
+		<h:form>
+			
+			Parking postion Id: <h:inputText value="#{airportFacadeBean.parkingPositionId}"/>
+			Airplane Id: <h:inputText value="#{airportFacadeBean.parkingPositionAirplaneId}"/>
+			Reservation start date:
+			<h:inputText value="#{airportFacadeBean.parkingPositionReservationStartDate}" />
+			<h:commandButton action="#{airportFacadeBean.reserveParkingPosition}" value="reserve parking position" />
+			
+		</h:form>
+		
+		<b>Order Queue</b>
+		<h:form>
+			
+			Airplane Id: <h:inputText value="#{airportFacadeBean.orderQueueAirplaneId}"/>
+			<h:commandButton action="#{airportFacadeBean.orderQueue}" value="order queue" />
+			
+		</h:form>
+		
+		<b>Cancel Landing</b>
+		<h:form>
+			
+			Airplane Id: <h:inputText value="#{airportFacadeBean.cancelLandingAirplaneId}"/>
+			<h:commandButton action="#{airportFacadeBean.cancelLanding}" value="cancel landing" />
+			
+		</h:form>
+		
+		<b>Release Runway</b>
+		<h:form>
+			
+			Runway Id: <h:inputText value="#{airportFacadeBean.releaseRunwayId}"/>
+			<h:commandButton action="#{airportFacadeBean.releaseRunway}" value="release runway" />
+			
+		</h:form>
+		
+		
+		<h:messages></h:messages>
+		
+	</h:body>
+</html>
