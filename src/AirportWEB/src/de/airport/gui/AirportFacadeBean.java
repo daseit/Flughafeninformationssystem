@@ -32,11 +32,13 @@ public class AirportFacadeBean {
 	private int runwayId;
 	private int runwayAirplaneId;
 	private String runwayReservationStartDate;
+	private String runwayReservationStartTime;
 	
 	// reserve parking position
 	private int parkingPositionId;
 	private int parkingPositionAirplaneId;
 	private String parkingPositionReservationStartDate;
+	private String parkingPositionReservationStartTime;
 	
 	// order queue
 	private int orderQueueAirplaneId;
@@ -113,18 +115,16 @@ public class AirportFacadeBean {
 		
 		Date date = null;
 		try {
-			// TODO: find better solution for date input
-			date = new SimpleDateFormat("dd.MM.yyyy hh:mm", Locale.GERMAN).parse(this.runwayReservationStartDate);
+			// parse date
+			date = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.GERMAN).parse(this.runwayReservationStartDate + " " + this.runwayReservationStartTime);			
+			java.sql.Timestamp sqlDate = new java.sql.Timestamp(date.getTime());
+			
+			// delegate
+			facade.reserveRunway(this.runwayId, sqlDate, this.runwayAirplaneId);
 		
 		} catch (ParseException e) {
-			e.printStackTrace();
-			return "";
+			System.out.println("[AirportFacadeBean][reserveRunway] Cannot parse date " + this.runwayReservationStartDate + " " + this.runwayReservationStartTime);
 		}
-		
-		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-		
-		
-		facade.reserveRunway(this.runwayId, sqlDate, this.runwayAirplaneId);
 		
 		return "";
 	}
@@ -149,18 +149,17 @@ public class AirportFacadeBean {
 		
 		Date date = null;
 		try {
-			// TODO: find better solution for date input
-			date = new SimpleDateFormat("dd.MM.yyyy hh:mm", Locale.GERMAN).parse(this.runwayReservationStartDate);
+			
+			// parse date
+			date = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.GERMAN).parse(this.parkingPositionReservationStartDate + " " + this.parkingPositionReservationStartTime);			
+			java.sql.Timestamp sqlDate = new java.sql.Timestamp(date.getTime());
+			
+			// delegate
+			facade.reserveParkingPosition(this.parkingPositionId, sqlDate, this.parkingPositionAirplaneId);
 		
 		} catch (ParseException e) {
-			e.printStackTrace();
-			return "";
+			System.out.println("[AirportFacadeBean][reserveParkingPosition] Cannot parse date " + this.parkingPositionReservationStartDate + " " + this.parkingPositionReservationStartTime);	
 		}
-		
-		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-		
-		
-		facade.reserveParkingPosition(this.parkingPositionId, sqlDate, this.parkingPositionAirplaneId);
 		
 		return "";
 	}
@@ -200,6 +199,9 @@ public class AirportFacadeBean {
 		return "";
 	}
 	
+	
+	// TESTING ONLY AREA!
+	// TODO: Remove these methods!
 	/**
 	 * Init demo site.
 	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
@@ -251,6 +253,7 @@ public class AirportFacadeBean {
 		
 		return "";
 	}
+	
 	
 	
 	// getters and setters
@@ -350,6 +353,19 @@ public class AirportFacadeBean {
 	}
 	public void setReleaseRunwayId(int releaseRunwayId) {
 		this.releaseRunwayId = releaseRunwayId;
+	}
+	public String getRunwayReservationStartTime() {
+		return runwayReservationStartTime;
+	}
+	public void setRunwayReservationStartTime(String runwayReservationStartTime) {
+		this.runwayReservationStartTime = runwayReservationStartTime;
+	}
+	public String getParkingPositionReservationStartTime() {
+		return parkingPositionReservationStartTime;
+	}
+	public void setParkingPositionReservationStartTime(
+			String parkingPositionReservationStartTime) {
+		this.parkingPositionReservationStartTime = parkingPositionReservationStartTime;
 	}
 	
 	
