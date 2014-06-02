@@ -43,6 +43,9 @@ public class AirportFacadeBean {
 	
 	// cancel landing
 	private int cancelLandingAirplaneId;
+	
+	// release runway
+	private int releaseRunwayId;
 
 	@EJB
 	private AirportFacade facade;
@@ -174,7 +177,7 @@ public class AirportFacadeBean {
 	}
 	
 	/**
-	 * Remove airplane from system (database). (Requirement 11435)
+	 * Remove airplane from system (database).
 	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
 	 * @return Empty string for JSF command button.
 	 */
@@ -185,6 +188,17 @@ public class AirportFacadeBean {
 		return "";
 	}
 	
+	/**
+	 * Release reserved runway.
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 * @return Empty string for JSF command button.
+	 */
+	public String releaseRunway() {
+		
+		facade.releaseRunway(this.releaseRunwayId);
+		
+		return "";
+	}
 	
 	/**
 	 * Init demo site.
@@ -330,6 +344,12 @@ public class AirportFacadeBean {
 	}
 	public void setCancelLandingAirplaneId(int cancelLandingAirplaneId) {
 		this.cancelLandingAirplaneId = cancelLandingAirplaneId;
+	}
+	public int getReleaseRunwayId() {
+		return releaseRunwayId;
+	}
+	public void setReleaseRunwayId(int releaseRunwayId) {
+		this.releaseRunwayId = releaseRunwayId;
 	}
 	
 	

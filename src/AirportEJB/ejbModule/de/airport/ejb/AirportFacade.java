@@ -415,11 +415,30 @@ public class AirportFacade {
 	 */
 	public void cancelLanding(int airplaneId) {
 		
+		// TODO: Release runway and parking position?
+		// TODO: Remove airplane from flight controller?
 		Query q = em.createQuery("delete from airplane c WHERE c.id = '" + airplaneId + "'");
 		
 		if(q.executeUpdate() <= 0) {
 			System.out.println("[AirportFacade][cancelLanding] Error: Cancel landing for airplane " +
 					airplaneId + " failed! No database update.");
+		}
+		
+	}
+	
+	/**
+	 * Release reserved runway.
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 * @param runwayId Unique runway id.
+	 */
+	public void releaseRunway(int runwayId) {
+		
+		Query q = em.createQuery("update runway set airplane = null, reservationTimeStart = null, " +
+									"reservationTimeEnd = null where id = '" + runwayId + "'");
+		
+		if(q.executeUpdate() <= 0) {
+			System.out.println("[AirportFacade][releaseRunway] Error: Release runway " +
+					runwayId + " failed! No database update.");
 		}
 		
 	}
