@@ -14,6 +14,7 @@ import de.airport.ejb.model.Airline;
 import de.airport.ejb.model.Airplane;
 import de.airport.ejb.model.AirplaneType;
 import de.airport.ejb.model.FlightController;
+import de.airport.ejb.model.ParkingPosition;
 import de.airport.ejb.model.Runway;
 
 @Stateless
@@ -311,4 +312,102 @@ public class AirportFacade {
 		}
 		
 	}
+
+	
+	// parking positions
+	/**
+	 * Add 10 parking positions to the database.
+	 * @author Benjamin Rupp <beruit01@hs-esslingen.de>
+	 */
+	public void addParkingPositions() {
+		
+		for(int i=0; i<10; i++) {
+			
+			em.persist( new ParkingPosition() );
+			
+		}
+	}
+	
+	/**
+	 * Return all parking position objects from the database. (Requirement 11420)
+	 * @author Benjamin Rupp <beruit01@hs-esslingen.de>
+	 * @return List with all parking position objects stored in the database.
+	 */
+	@SuppressWarnings("unchecked")
+	public List<ParkingPosition> getParkingPositions() {
+		
+		Query query = em.createQuery("select e from parking_position e order by e.id");
+		return query.getResultList();
+		
+	}
+	
+	/**
+	 * Print current parking position status to console.
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 * @return Empty string for JSF command button.
+	 */
+	public String printParkingPositions() {
+		
+		List<ParkingPosition> list = getParkingPositions();
+		
+		System.out.println("\nParking position status\n--------------------");
+		for(ParkingPosition p : list) {
+			System.out.print("#" + p.getId() + "\t" +
+						p.getReservationTimeStart() + "\t" +
+						p.getReservationTimeEnd() + "\t");
+			
+			if(p.getAirplane() == null) System.out.print("-\n");
+			else System.out.print(p.getAirplane().getName() + "\n");
+		}
+		
+		return "";
+	}
+	
+		
+	/**
+	 * Reserve a parking position for landing. (Requirement 11425)
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 * @param parkingPositionId Unique parking position identifier
+	 * @param reservationStartTime Reservation start time.
+	 * @param airplaneId Unique airplane identifier.
+	 */
+	public void reserveParkingPosition(int parkingPositionId, Date reservationStartTime, int airplaneId) {
+		
+		// modify parking position object in database
+		Query qParkingPosition = em.createQuery("update parking_position set airplane = '" + airplaneId + "'" +
+							", reservationTimeStart = '" + reservationStartTime + "'" +
+							" where id = '" + parkingPositionId + "'");
+		int updateCnt = qParkingPosition.executeUpdate();
+		
+		if(updateCnt <= 0) {
+			System.out.println("[AirportFacade][reserveParkingPosition] Error: Reserving parking postion " +
+								parkingPositionId + " failed! No database update.");
+		}
+		
+	}
+
+
+	/**
+	 * Set airplane state to IN_QUEUE. (Requirement 11430)
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 * @param airplaneId
+	 */
+	public void orderQueue(int airplaneId) {
+		
+		int inQueueInt = Airplane.State.IN_QUEUE.ordinal();
+		
+		// modify parking position object in database
+		Query q = em.createQuery("update airplane set state = '" + inQueueInt + "'" +
+							" where id = '" + airplaneId + "'");
+		
+		int updateCnt = q.executeUpdate();
+		
+		if(updateCnt <= 0) {
+			System.out.println("[AirportFacade][orderQueue] Error: Order queue for airplane " +
+								airplaneId + " failed! No database update.");
+		}
+		
+	}
+
+
 }

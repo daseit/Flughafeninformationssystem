@@ -30,8 +30,16 @@ public class AirportFacadeBean {
 	
 	// reserve runway
 	private int runwayId;
-	private int airplaneId;
-	private String reservationStartDate;
+	private int runwayAirplaneId;
+	private String runwayReservationStartDate;
+	
+	// reserve parking position
+	private int parkingPositionId;
+	private int parkingPositionAirplaneId;
+	private String parkingPositionReservationStartDate;
+	
+	// order queue
+	private int orderQueueAirplaneId;
 
 	@EJB
 	private AirportFacade facade;
@@ -100,7 +108,7 @@ public class AirportFacadeBean {
 		Date date = null;
 		try {
 			// TODO: find better solution for date input
-			date = new SimpleDateFormat("dd.MM.yyyy hh:mm", Locale.GERMAN).parse(this.reservationStartDate);
+			date = new SimpleDateFormat("dd.MM.yyyy hh:mm", Locale.GERMAN).parse(this.runwayReservationStartDate);
 		
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -110,7 +118,54 @@ public class AirportFacadeBean {
 		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 		
 		
-		facade.reserveRunway(this.runwayId, sqlDate, this.airplaneId);
+		facade.reserveRunway(this.runwayId, sqlDate, this.runwayAirplaneId);
+		
+		return "";
+	}
+	
+	/**
+	 * Return all parking position objects from the database.
+	 * @author Benjamin Rupp <beruit01@hs-esslingen.de>
+	 * @return List with all parking position objects stored in the database.
+	 */
+	public List<ParkingPosition> getParkingPositions() {
+		
+		return facade.getParkingPositions();
+		
+	}
+
+	/**
+	 * Reserve a parking position for landing of an airplane.
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 * @return Empty string for JSF command button.
+	 */
+	public String reserveParkingPosition() {
+		
+		Date date = null;
+		try {
+			// TODO: find better solution for date input
+			date = new SimpleDateFormat("dd.MM.yyyy hh:mm", Locale.GERMAN).parse(this.runwayReservationStartDate);
+		
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return "";
+		}
+		
+		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+		
+		
+		facade.reserveParkingPosition(this.parkingPositionId, sqlDate, this.parkingPositionAirplaneId);
+		
+		return "";
+	}
+	
+	/**
+	 * Set airplane state to IN_QUEUE.
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 * @return Empty string for JSF command button.
+	 */
+	public String orderQueue() {
+		facade.orderQueue(this.orderQueueAirplaneId);
 		
 		return "";
 	}
@@ -133,6 +188,10 @@ public class AirportFacadeBean {
 		System.out.println("\nCreate runways..");
 		facade.addRunways();
 		facade.printRunways();
+		
+		System.out.println("\nCreate parking positions..");
+		facade.addParkingPositions();
+		facade.printParkingPositions();
 		
 		System.out.println("\nCreate airlines");
 		facade.addAirline("myAirline", "Stuttgart");
@@ -159,6 +218,7 @@ public class AirportFacadeBean {
 		facade.printAirplaneTypes();
 		facade.printFlightController();
 		facade.printRunways();
+		facade.printParkingPositions();
 		
 		return "";
 	}
@@ -207,24 +267,48 @@ public class AirportFacadeBean {
 	public void setRunwayId(int runwayId) {
 		this.runwayId = runwayId;
 	}
-	public int getAirplaneId() {
-		return airplaneId;
+	public int getRunwayAirplaneId() {
+		return runwayAirplaneId;
 	}
-	public void setAirplaneId(int airplaneId) {
-		this.airplaneId = airplaneId;
+	public void setRunwayAirplaneId(int runwayAirplaneId) {
+		this.runwayAirplaneId = runwayAirplaneId;
 	}
-	public String getReservationStartDate() {
-		return reservationStartDate;
+	public String getRunwayReservationStartDate() {
+		return runwayReservationStartDate;
 	}
-	public void setReservationStartDate(String reservationStartDate) {
-		this.reservationStartDate = reservationStartDate;
+	public void setRunwayReservationStartDate(String runwayReservationStartDate) {
+		this.runwayReservationStartDate = runwayReservationStartDate;
 	}
-
 	public String getAirplaneName() {
 		return airplaneName;
 	}
-
 	public void setAirplaneName(String airplaneName) {
 		this.airplaneName = airplaneName;
 	}
+	public int getParkingPositionId() {
+		return parkingPositionId;
+	}
+	public void setParkingPositionId(int parkingPositionId) {
+		this.parkingPositionId = parkingPositionId;
+	}
+	public int getParkingPositionAirplaneId() {
+		return parkingPositionAirplaneId;
+	}
+	public void setParkingPositionAirplaneId(int parkingPositionAirplaneId) {
+		this.parkingPositionAirplaneId = parkingPositionAirplaneId;
+	}
+	public String getParkingPositionReservationStartDate() {
+		return parkingPositionReservationStartDate;
+	}
+	public void setParkingPositionReservationStartDate(
+			String parkingPositionReservationStartDate) {
+		this.parkingPositionReservationStartDate = parkingPositionReservationStartDate;
+	}
+	public int getOrderQueueAirplaneId() {
+		return orderQueueAirplaneId;
+	}
+	public void setOrderQueueAirplaneId(int orderQueueAirplaneId) {
+		this.orderQueueAirplaneId = orderQueueAirplaneId;
+	}
+	
 }
