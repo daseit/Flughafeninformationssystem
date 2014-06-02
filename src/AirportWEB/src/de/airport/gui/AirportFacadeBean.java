@@ -40,6 +40,9 @@ public class AirportFacadeBean {
 	
 	// order queue
 	private int orderQueueAirplaneId;
+	
+	// cancel landing
+	private int cancelLandingAirplaneId;
 
 	@EJB
 	private AirportFacade facade;
@@ -166,6 +169,18 @@ public class AirportFacadeBean {
 	 */
 	public String orderQueue() {
 		facade.orderQueue(this.orderQueueAirplaneId);
+		
+		return "";
+	}
+	
+	/**
+	 * Remove airplane from system (database). (Requirement 11435)
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 * @return Empty string for JSF command button.
+	 */
+	public String cancelLanding() {
+		
+		facade.cancelLanding(this.cancelLandingAirplaneId);
 		
 		return "";
 	}
@@ -310,5 +325,12 @@ public class AirportFacadeBean {
 	public void setOrderQueueAirplaneId(int orderQueueAirplaneId) {
 		this.orderQueueAirplaneId = orderQueueAirplaneId;
 	}
+	public int getCancelLandingAirplaneId() {
+		return cancelLandingAirplaneId;
+	}
+	public void setCancelLandingAirplaneId(int cancelLandingAirplaneId) {
+		this.cancelLandingAirplaneId = cancelLandingAirplaneId;
+	}
+	
 	
 }

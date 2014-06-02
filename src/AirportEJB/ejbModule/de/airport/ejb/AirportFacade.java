@@ -396,7 +396,6 @@ public class AirportFacade {
 		
 		int inQueueInt = Airplane.State.IN_QUEUE.ordinal();
 		
-		// modify parking position object in database
 		Query q = em.createQuery("update airplane set state = '" + inQueueInt + "'" +
 							" where id = '" + airplaneId + "'");
 		
@@ -409,5 +408,19 @@ public class AirportFacade {
 		
 	}
 
-
+	/**
+	 * Remove airplane from system (database). (Requirement 11435)
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 * @param airplaneId
+	 */
+	public void cancelLanding(int airplaneId) {
+		
+		Query q = em.createQuery("delete from airplane c WHERE c.id = '" + airplaneId + "'");
+		
+		if(q.executeUpdate() <= 0) {
+			System.out.println("[AirportFacade][cancelLanding] Error: Cancel landing for airplane " +
+					airplaneId + " failed! No database update.");
+		}
+		
+	}
 }
