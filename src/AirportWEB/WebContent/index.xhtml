@@ -1,12 +1,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
 
 <h:head>
-	<link href="/airport/resources/bootstrap.min.css" rel="stylesheet"></link>
-	<link href="/airport/resources/bootstrap-theme.min.css"
+	<link href="/airport/resources/css/bootstrap.min.css" rel="stylesheet"></link>
+	<link href="/airport/resources/css/bootstrap-theme.min.css"
 		rel="stylesheet"></link>
 	<link href="/airport/resources/custom-template.css" rel="stylesheet" />
 	<link
@@ -27,7 +28,6 @@
 <h:body>
 
 
-
 	<div class="container">
 
 		<div class="row">
@@ -45,212 +45,11 @@
 	<div class="container">
 
 
-
-
-
-
-
-
-
-
+		<!-- Flugzeug Details -->
 		<div class="col-sm-8">
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<h3 class="panel-title">Flugzeugdetails</h3>
-				</div>
-				<div class="panel-body">
-
-					<div class="row">
-						<form class="form-horizontal" role="form">
-							<div class="form-group">
-
-								<label for="inputFlightName" class="col-sm-4 control-label">Flugname</label>
-
-								<div class="col-sm-4">
-									<input class="form-control" id="inputFlightName" placeholder="" />
-								</div>
-
-							</div>
-						</form>
-					</div>
-					<div class="row">
-						<form class="form-horizontal" role="form">
-							<div class="form-group">
-
-								<label for="inputFlightName" class="col-sm-4 control-label">Flugzeugtyp</label>
-
-								<div class="col-sm-4">
-									<select class="form-control" id="selectAirplaneType">
-										<option value="one">One</option>
-										<option value="two">Two</option>
-										<option value="three">Three</option>
-										<option value="four">Four</option>
-										<option value="five">Five</option>
-									</select>
-								</div>
-								<button type="submit" id="addAirplaneType"
-									class="col-sm-1 btn btn-default">+</button>
-							</div>
-						</form>
-					</div>
-
-					<div class="row">
-
-						<form class="form-horizontal" role="form">
-							<div class="form-group">
-
-								<label for="inputFlightName" class="col-sm-4 control-label">Luftfahrtgesellschaft</label>
-
-								<div class="col-sm-4">
-									<select class="form-control" id="selectAirline">
-										<option value="one">One</option>
-										<option value="two">Two</option>
-										<option value="three">Three</option>
-										<option value="four">Four</option>
-										<option value="five">Five</option>
-									</select>
-								</div>
 
 
-
-
-								<!-- Button trigger modal -->
-								<button class="col-sm-1 btn btn-default" data-toggle="modal"
-									data-target="#addAirlinePopover">+</button>
-
-
-								<!-- Modal -->
-								<div class="modal fade" id="addAirlinePopover" tabindex="-1"
-									role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal"
-													aria-hidden="true">;</button>
-												<h4 class="modal-title" id="myModalLabel">Flughafeddn</h4>
-											</div>
-											<div class="modal-body">
-
-
-												<div class="row">
-													<form class="form-horizontal" role="form">
-														<div class="form-group">
-															<label for="inputAirlineName"
-																class="col-sm-6 control-label">Name</label>
-
-															<div class="col-sm-6">
-																<input class="form-control" id="inputAirlineName"
-																	placeholder="" />
-															</div>
-														</div>
-													</form>
-												</div>
-
-												<div class="row">
-													<form class="form-horizontal" role="form">
-														<div class="form-group">
-															<label for="inputAirlineStreet"
-																class="col-sm-6 control-label">Straße</label>
-
-															<div class="col-sm-6">
-																<input class="form-control" id="inputAirlineStreet"
-																	placeholder="" />
-															</div>
-														</div>
-													</form>
-												</div>
-												<div class="row">
-													<form class="form-horizontal" role="form">
-														<div class="form-group">
-															<label for="inputAirlineCity"
-																class="col-sm-6 control-label">Stadt</label>
-
-															<div class="col-sm-6">
-																<input class="form-control" id="inputAirlineCity"
-																	placeholder="" />
-															</div>
-														</div>
-													</form>
-												</div>
-												<div class="row">
-													<form class="form-horizontal" role="form">
-														<div class="form-group">
-															<label for="inputAirlineCountry"
-																class="col-sm-6 control-label">Land</label>
-
-															<div class="col-sm-6">
-																<input class="form-control" id="inputAirlineCountry"
-																	placeholder="" />
-															</div>
-														</div>
-													</form>
-												</div>
-
-
-
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default"
-													data-dismiss="modal">Abbrechen</button>
-												<button type="button" class="btn btn-primary">Bestätigen</button>
-											</div>
-										</div>
-									</div>
-								</div>
-
-
-
-							</div>
-
-
-						</form>
-
-					</div>
-
-
-					<div class="row">
-						<form class="form-horizontal" role="form">
-							<div class="form-group">
-
-								<label class="col-sm-4 control-label">Landung planen:</label>
-
-								<div class="container col-sm-2">
-									<div class="input-append date datepicker no-padding"
-										data-date-format="dd.mm.yyyy">
-										<input class="input-medium" size="6" type="text" /><span
-											class="add-on"><i class="icon-th"></i></span>
-									</div>
-								</div>
-
-								<div class="container col-sm-2">
-
-									<div class="input-group clockpicker">
-										<input type="text" class="form-control" value="18:00" /> <span
-											class="input-group-addon"> <span
-											class="glyphicon glyphicon-time"></span>
-										</span>
-									</div>
-
-								</div>
-
-							</div>
-						</form>
-					</div>
-
-
-
-					<div id="buttons" style="float: right">
-
-
-						<button class="btn btn-default" data-toggle="" data-target="#">Flugzeug
-							hinzufügen</button>
-					</div>
-
-				</div>
-
-
-			</div>
-
+			<ui:include src="/templates/airplanedetails.tpl.xhtml" />
 
 
 
@@ -272,84 +71,12 @@
 
 		<!-- Flugzeug zuweisen Container -->
 		<div class="col-sm-8">
-
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<h3 class="panel-title">Flugzeug zuweisen</h3>
-				</div>
-				<div class="panel-body">
-
-					<form class="form-horizontal" role="form">
-						<div class="form-group">
-
-							<label for="selectFlightName" class="col-sm-4 control-label">Flug</label>
-
-							<div class="col-sm-4">
-								<select class="form-control" id="selectFlightName">
-									<option value="TDD-224">One</option>
-									<option value="BC-552">Two</option>
-									<option value="three">Three</option>
-									<option value="four">Four</option>
-									<option value="five">Five</option>
-								</select>
-							</div>
-
-						</div>
-					</form>
-
-					<form class="form-horizontal" role="form">
-						<div class="form-group">
-
-							<label for="selectRunway" class="col-sm-4 control-label">Landebahn</label>
-
-							<div class="col-sm-4">
-								<select class="form-control" id="selectRunway">
-									<option value="one">One</option>
-									<option value="two">Two</option>
-									<option value="three">Three</option>
-									<option value="four">Four</option>
-									<option value="five">Five</option>
-								</select>
-							</div>
-
-						</div>
-					</form>
-
-					<form class="form-horizontal" role="form">
-						<div class="form-group">
-
-							<label for="selecParkingPosition" class="col-sm-4 control-label">Parkposition</label>
-
-							<div class="col-sm-4">
-								<select class="form-control" id="selecParkingPosition">
-									<option value="one">One</option>
-									<option value="two">Two</option>
-									<option value="three">Three</option>
-									<option value="four">Four</option>
-
-								</select>
-							</div>
-
-						</div>
-					</form>
-					<form class="form-horizontal" role="form">
-						<div class="form-group row">
-							<div id="buttons" style="float: left">
-								<button class="btn btn-default" data-toggle="" data-target="#">Landung
-									verweigern</button>
-							</div>
-
-							<div id="buttons" style="float: right">
-								<button class="btn btn-default" data-toggle="" data-target="#">Landung
-									bestätigen</button>
-							</div>
-
-						</div>
-					</form>
+			<ui:include src="/templates/assignairplane.tpl.xhtml" />
 
 
-				</div>
-			</div>
+
+
+
 		</div>
 
 		<!-- Landebahnen Container -->
@@ -379,12 +106,11 @@
 		<!-- Aktuelle Flüge Container -->
 		<div class="col-sm-8">
 
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<h3 class="panel-title">Flüge</h3>
-				</div>
-				<div class="panel-body"></div>
-			</div>
+
+
+			<ui:include src="/templates/flights.tpl.xhtml" />
+
+
 		</div>
 
 
