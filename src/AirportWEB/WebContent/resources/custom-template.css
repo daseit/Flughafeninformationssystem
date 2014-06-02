@@ -10,3 +10,30 @@
 .control-label {
 	text-align: left !important;
 }
+
+
+.datepicker {
+	padding: 0px !important;
+	margin-top: 0px !important;
+	
+
+	
+}
+
+.clockpicker {
+	padding: 0px !important;
+
+
+	
+}
+
+.left-inner-addon input {
+    padding-left: 30px;    
+}
+
+
+.left-inner-addon i {
+    position: absolute;
+    padding: 1000px 2px;
+    pointer-events: none;
+}
