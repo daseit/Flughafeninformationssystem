@@ -83,6 +83,14 @@
 			
 		</h:form>
 		
+		<b>Next State</b>
+		<h:form>
+			
+			Airplane Id: <h:inputText value="#{airportFacadeBean.nextStateAirplaneId}"/>
+			<h:commandButton action="#{airportFacadeBean.nextState}" value="next >>" />
+			
+		</h:form>
+		
 		
 		<h:messages></h:messages>
 		

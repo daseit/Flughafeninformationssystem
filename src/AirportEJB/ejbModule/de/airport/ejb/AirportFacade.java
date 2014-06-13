@@ -12,6 +12,7 @@ import javax.persistence.Query;
 import de.airport.ejb.model.Account;
 import de.airport.ejb.model.Airline;
 import de.airport.ejb.model.Airplane;
+import de.airport.ejb.model.Airplane.State;
 import de.airport.ejb.model.AirplaneType;
 import de.airport.ejb.model.FlightController;
 import de.airport.ejb.model.ParkingPosition;
@@ -115,6 +116,59 @@ public class AirportFacade {
 			System.out.println("\t\t" + a.getState() + "\n");
 			
 		}
+	}
+	
+	/**
+	 * A method to simulate the 5 different states of an airplane. When called, it set the next status of the airplane.
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 * @param airplaneId Unique airplane identifier.
+	 */
+	public void nextState(int airplaneId) {
+		
+		Query qCurrentState = em.createQuery("select e from airplane e where e.id = '" + airplaneId + "'");
+		
+		if( qCurrentState.getResultList().size() > 0) {
+			
+			Airplane airplane = (Airplane) qCurrentState.getResultList().get(0);
+			Airplane.State newState = State.IN_APPROACH;
+			
+			// set new state
+			switch(airplane.getState()) {
+			
+			case IN_APPROACH:
+				newState = State.ACCEPTED;
+				break;
+			
+			case ACCEPTED:
+			case IN_QUEUE:
+				newState = State.LANDED;
+				break;
+			
+			case LANDED:
+				newState = State.PARKING;
+				break;
+			
+			case PARKING:
+				newState = State.PARKING;
+			
+			}
+			
+			// write to database
+			Query qNewState = em.createQuery("update airplane set state = '" + newState.ordinal() + "'" +
+								" where id = '" + airplaneId + "'");
+			int updateCnt = qNewState.executeUpdate();
+			
+			if(updateCnt <= 0) {
+				System.out.println("[AirportFacade][nextState] Error: Set new state " +
+									newState + " failed! No database update.");
+			}
+			
+			
+		}else{
+			System.out.println("[AirportFacade][nextState] Error: No airplane found! (airplane id: " + airplaneId + ")");
+			return;
+		}
+		
 	}
 	
 	// airline

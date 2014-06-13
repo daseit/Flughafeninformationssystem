@@ -51,6 +51,9 @@ public class AirportFacadeBean {
 	
 	// release runway
 	private int releaseRunwayId;
+	
+	// set next state
+	private int nextStateAirplaneId;
 
 	@EJB
 	private AirportFacade facade;
@@ -108,6 +111,18 @@ public class AirportFacadeBean {
 			System.out.println("[AirportFacadeBean][acceptAirplane] Cannot parse date " + this.parkingPositionReservationStartDate + " " + this.parkingPositionReservationStartTime);
 		}
 		
+		return "";
+	}
+	
+	/**
+	 * A method to simulate the 5 different states of an airplane. When called, it set the next status of the airplane.
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 * @param airplaneId Unique airplane identifier.
+	 * @return Empty string for JSF command button.
+	 */
+	public String nextState() {
+		
+		facade.nextState(this.nextStateAirplaneId);
 		return "";
 	}
 	
@@ -282,6 +297,9 @@ public class AirportFacadeBean {
 		facade.addAirplaneType("Boeing 747");
 		facade.printAirplaneTypes();
 		
+		System.out.println("\nCreate airplanes");
+		facade.addAirplane("Boeing 747", "myAirline", 1, 123);
+		facade.addAirplane("Boeing 747", "AirStefaan", 2, 123);
 		return "";
 	}
 	/**
@@ -420,6 +438,12 @@ public class AirportFacadeBean {
 	}
 	public void setAddAirplaneTypeName(String addAirplaneTypeName) {
 		this.addAirplaneTypeName = addAirplaneTypeName;
+	}
+	public int getNextStateAirplaneId() {
+		return nextStateAirplaneId;
+	}
+	public void setNextStateAirplaneId(int nextStateAirplaneId) {
+		this.nextStateAirplaneId = nextStateAirplaneId;
 	}
 	
 }

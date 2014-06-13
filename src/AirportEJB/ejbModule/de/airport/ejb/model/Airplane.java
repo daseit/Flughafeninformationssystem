@@ -43,7 +43,7 @@ public class Airplane implements Serializable {
 	@JoinColumn(name="flight_id")
 	private Flight flight;
 	
-	public enum State { IN_QUEUE, IN_APPROACH, PARKING }
+	public enum State { IN_QUEUE, IN_APPROACH, ACCEPTED, LANDED, PARKING }
 	private State state;
 	
 	public Airline getAirline() {
