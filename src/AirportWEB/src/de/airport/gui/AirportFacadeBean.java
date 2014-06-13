@@ -174,6 +174,14 @@ public class AirportFacadeBean {
 		
 		return "";
 	}
+	/**
+	 * Return a list of all airplanes in state IN_QUEUE.
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 * @return List with all airplanes in state IN_QUEUE.
+	 */
+	public List<Airplane> getQueue() {
+		return facade.getQueue();
+	}
 	
 	/**
 	 * Remove airplane from system (database).

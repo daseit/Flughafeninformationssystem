@@ -404,6 +404,20 @@ public class AirportFacade {
 		}
 		
 	}
+	
+	/**
+	 * Return a list of all airplanes in state IN_QUEUE.
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 * @return List with all airplanes in state IN_QUEUE.
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Airplane> getQueue() {
+		
+		int inQueueInt = Airplane.State.IN_QUEUE.ordinal();
+		Query query = em.createQuery("select e from airplane e where e.state = '" + inQueueInt + "' order by e.id");
+		return query.getResultList();
+		
+	}
 
 	/**
 	 * Remove airplane from system (database). (Requirement 11435)

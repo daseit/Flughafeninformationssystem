@@ -1,6 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:f="http://java.sun.com/jsf/core">
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
 
 	<h:head>
 	</h:head>
@@ -26,7 +27,7 @@
 			Airplane type name: <h:inputText value="#{airportFacadeBean.airplaneTypeName}"/>
 			Airline name: <h:inputText value="#{airportFacadeBean.addAirplaneAirlineName}"/>
 			Flight controller id: <h:inputText value="#{airportFacadeBean.flightControllerId}"/>
-			Name: <h:inputText value="#{airportFacadeBean.airplaneName}"/>
+			<!-- Name: <h:inputText value="#{airportFacadeBean.airplaneId}"/> -->
 			<h:commandButton action="#{airportFacadeBean.addAirplane}" value="add airplane"/>
 		</h:form>
 		
@@ -78,6 +79,12 @@
 		
 		
 		<h:messages></h:messages>
+		
+		<hr/>
+		<h3 style="display: inline">IN_QUEUE:  </h3>			
+		<ui:repeat var="current" value="#{airportFacadeBean.getQueue()}">
+			| <h:outputText value="#{current.id}" /> |
+		</ui:repeat>
 		
 	</h:body>
 </html>
