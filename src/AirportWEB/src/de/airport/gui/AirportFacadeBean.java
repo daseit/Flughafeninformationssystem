@@ -18,7 +18,7 @@ import de.airport.ejb.model.*;
 public class AirportFacadeBean {
 	
 	// -------- parameters ---------------
-	// add new airplane
+	// register new airplane
 	private String airplaneTypeName;
 	private String addAirplaneAirlineName;
 	private int flightControllerId;
@@ -58,14 +58,31 @@ public class AirportFacadeBean {
 	
 	// -------- methods ------------------
 	/**
-	 * Add a new airplane to the system.
-	 * Necessary values are stored in the AirportFacadeBean.
+	 * Register a new airplane.
 	 * @author Benjamin Rupp <beruit01@hs-esslingen.de>
 	 * @return Empty String for JSF command button.
 	 */
-	public String addAirplane() {
+	public String registerAirplane() {
 		
+		// add airplane to system
 		facade.addAirplane(this.airplaneTypeName, this.addAirplaneAirlineName, this.flightControllerId, this.airplaneId);
+		
+		// reserve runway
+		Date date = null;
+		try {
+			// parse date
+			date = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.GERMAN).parse(this.runwayReservationStartDate + " " + this.runwayReservationStartTime);			
+			java.sql.Timestamp sqlDate = new java.sql.Timestamp(date.getTime());
+			
+			// delegate
+			facade.reserveRunway(this.runwayId, sqlDate, this.airplaneId);
+		
+		} catch (ParseException e) {
+			System.out.println("[AirportFacadeBean][registerAirplane] Cannot parse date " + this.runwayReservationStartDate + " " + this.runwayReservationStartTime);
+		}
+		
+		// add estimated date and time
+		// TODO: Needs implemented actual and estimated landing time. (issue #3)
 		
 		return "";
 	}
