@@ -86,6 +86,31 @@ public class AirportFacadeBean {
 		
 		return "";
 	}
+	
+	/**
+	 * Accept a airplane and reserve parking position.
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 * @return
+	 */
+	public String acceptAirplane() {
+		
+		// reserve parking position
+		Date date = null;
+		try {
+			// parse date
+			date = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.GERMAN).parse(this.parkingPositionReservationStartDate + " " + this.parkingPositionReservationStartTime);			
+			java.sql.Timestamp sqlDate = new java.sql.Timestamp(date.getTime());
+			
+			// delegate
+			facade.reserveParkingPosition(this.parkingPositionId, sqlDate, this.parkingPositionAirplaneId);
+		
+		} catch (ParseException e) {
+			System.out.println("[AirportFacadeBean][acceptAirplane] Cannot parse date " + this.parkingPositionReservationStartDate + " " + this.parkingPositionReservationStartTime);
+		}
+		
+		return "";
+	}
+	
 
 	// TODO: remove this! only for testing.
 	public String printAirplanes() {
@@ -160,29 +185,6 @@ public class AirportFacadeBean {
 		
 	}
 
-	/**
-	 * Reserve a parking position for landing of an airplane.
-	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
-	 * @return Empty string for JSF command button.
-	 */
-	public String reserveParkingPosition() {
-		
-		Date date = null;
-		try {
-			
-			// parse date
-			date = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.GERMAN).parse(this.parkingPositionReservationStartDate + " " + this.parkingPositionReservationStartTime);			
-			java.sql.Timestamp sqlDate = new java.sql.Timestamp(date.getTime());
-			
-			// delegate
-			facade.reserveParkingPosition(this.parkingPositionId, sqlDate, this.parkingPositionAirplaneId);
-		
-		} catch (ParseException e) {
-			System.out.println("[AirportFacadeBean][reserveParkingPosition] Cannot parse date " + this.parkingPositionReservationStartDate + " " + this.parkingPositionReservationStartTime);	
-		}
-		
-		return "";
-	}
 	
 	/**
 	 * Set airplane state to IN_QUEUE.
