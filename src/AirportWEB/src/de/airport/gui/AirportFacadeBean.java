@@ -28,6 +28,9 @@ public class AirportFacadeBean {
 	private String airlineName;
 	private String airlineAddress;
 	
+	// add new airplane type
+	private String addAirplaneTypeName;
+	
 	// reserve runway
 	private int runwayId;
 	private int runwayAirplaneId;
@@ -183,6 +186,15 @@ public class AirportFacadeBean {
 		return facade.getQueue();
 	}
 	
+	/**
+	 * Add new airplane type to the system.
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 * @return Empty string for JSF command button.
+	 */
+	public String addAirplaneType() {
+		facade.addAirplaneType(this.addAirplaneTypeName);
+		return "";
+	}
 	/**
 	 * Return all airplane type objects from the database.
 	 * @author Benjamin Rupp <beruit01@hs-esslingen.de>
@@ -384,6 +396,11 @@ public class AirportFacadeBean {
 			String parkingPositionReservationStartTime) {
 		this.parkingPositionReservationStartTime = parkingPositionReservationStartTime;
 	}
-	
+	public String getAddAirplaneTypeName() {
+		return addAirplaneTypeName;
+	}
+	public void setAddAirplaneTypeName(String addAirplaneTypeName) {
+		this.addAirplaneTypeName = addAirplaneTypeName;
+	}
 	
 }

@@ -22,6 +22,12 @@
 			<h:commandButton action="#{airportFacadeBean.addAirline}" value="add airline"/>
 		</h:form>
 		
+		<b>Airplane Type</b>
+		<h:form>
+			Name: <h:inputText value="#{airportFacadeBean.addAirplaneTypeName}"/>
+			<h:commandButton action="#{airportFacadeBean.addAirplaneType}" value="add airplane type"/>
+		</h:form>
+		
 		<b>Airplane</b>
 		<h:form>
 			Airplane type name: <h:inputText value="#{airportFacadeBean.airplaneTypeName}"/>
