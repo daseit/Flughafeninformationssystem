@@ -25,23 +25,23 @@ public class AirportFacade {
 	@PersistenceContext(unitName = "airport")
 	private EntityManager em;
 
-	// airplain
+	// airplane
 	/**
 	 * Add a new airplane to the system. (Requirement 11400)
 	 * @author Benjamin Rupp <beruit01@hs-esslingen.de>
-	 * @param airplaneTypeId Unique airplane identifier.
-	 * @param airlineId Unique airline identifier.
+	 * @param airplaneTypeName Unique airplane name.
+	 * @param airlineName Unique airline name.
 	 * @param flightControllerId Unique flight controller identifier.
 	 */
-	public void addAirplane(int airplaneTypeId, int airlineId, int flightControllerId, String name) {
+	public void addAirplane(String airplaneTypeName, String airlineName, int flightControllerId, int id) {
 		
 		Airplane airplane = new Airplane();
 		airplane.setState(Airplane.State.IN_APPROACH);
 		
 		
 		// get objects by id
-		Query qAirplaneType = em.createQuery("select e from airplaneType e where e.id = '" + airplaneTypeId + "'");
-		Query qAirline = em.createQuery("select e from airline e where e.id = '" + airlineId + "'");
+		Query qAirplaneType = em.createQuery("select e from airplaneType e where e.name = '" + airplaneTypeName + "'");
+		Query qAirline = em.createQuery("select e from airline e where e.name = '" + airlineName + "'");
 		Query qFlightController = em.createQuery("select e from flightController e where e.id = '" + flightControllerId + "'");
 		
 		// airplane
@@ -49,7 +49,7 @@ public class AirportFacade {
 			AirplaneType airplaneType = (AirplaneType) qAirplaneType.getResultList().get(0);
 			airplane.setAirplaneType(airplaneType);
 		}else{
-			System.out.println("[AirportFacade][addAirplane] Error: No airplane type found! (airplane type id: " + airplaneTypeId + ")");
+			System.out.println("[AirportFacade][addAirplane] Error: No airplane type found! (airplane type name: " + airplaneTypeName + ")");
 			return;
 		}
 		
@@ -58,7 +58,7 @@ public class AirportFacade {
 			Airline airline = (Airline) qAirline.getResultList().get(0);
 			airplane.setAirline(airline);
 		}else{
-			System.out.println("[AirportFacade][addAirplane] Error: No airline found! (airline id: " + airlineId + ")");
+			System.out.println("[AirportFacade][addAirplane] Error: No airline found! (airline name: " + airlineName + ")");
 			return;
 		}
 		
@@ -71,12 +71,9 @@ public class AirportFacade {
 			return;
 		}
 		
-		// name
-		if( !name.isEmpty() ) {
-			airplane.setName(name);
-		}else{
-			airplane.setName("no name");
-		}
+		// id
+		// TODO: The Airplane class should have id as primary key without auto increment. (issue #13)
+		//airplane.setId(id);
 		
 		
 		// write to database

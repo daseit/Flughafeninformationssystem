@@ -19,10 +19,10 @@ public class AirportFacadeBean {
 	
 	// -------- parameters ---------------
 	// add new airplane
-	private int airplaneTypeId;
-	private int airlineId;
+	private String airplaneTypeName;
+	private String addAirplaneAirlineName;
 	private int flightControllerId;
-	private String airplaneName;
+	private int airplaneId;
 	
 	// add new airline
 	private String airlineName;
@@ -62,7 +62,7 @@ public class AirportFacadeBean {
 	 */
 	public String addAirplane() {
 		
-		facade.addAirplane(this.airplaneTypeId, this.airlineId, this.flightControllerId, this.airplaneName);
+		facade.addAirplane(this.airplaneTypeName, this.addAirplaneAirlineName, this.flightControllerId, this.airplaneId);
 		
 		return "";
 	}
@@ -260,17 +260,17 @@ public class AirportFacadeBean {
 	public String getAirlineName() {
 		return airlineName;
 	}
-	public int getAirplaneTypeId() {
-		return airplaneTypeId;
+	public String getAirplaneTypeName() {
+		return airplaneTypeName;
 	}
-	public void setAirplaneTypeId(int airplaneTypeId) {
-		this.airplaneTypeId = airplaneTypeId;
+	public void setAirplaneTypeName(String airplaneTypeName) {
+		this.airplaneTypeName = airplaneTypeName;
 	}
-	public int getAirlineId() {
-		return airlineId;
+	public String getAddAirplaneAirlineName() {
+		return addAirplaneAirlineName;
 	}
-	public void setAirlineId(int airlineId) {
-		this.airlineId = airlineId;
+	public void setAddAirplaneAirlineName(String airlineName) {
+		this.addAirplaneAirlineName = airlineName;
 	}
 	public int getFlightControllerId() {
 		return flightControllerId;
@@ -311,11 +311,11 @@ public class AirportFacadeBean {
 	public void setRunwayReservationStartDate(String runwayReservationStartDate) {
 		this.runwayReservationStartDate = runwayReservationStartDate;
 	}
-	public String getAirplaneName() {
-		return airplaneName;
+	public int getAirplaneId() {
+		return airplaneId;
 	}
-	public void setAirplaneName(String airplaneName) {
-		this.airplaneName = airplaneName;
+	public void setAirplaneId(int airplaneId) {
+		this.airplaneId = airplaneId;
 	}
 	public int getParkingPositionId() {
 		return parkingPositionId;
