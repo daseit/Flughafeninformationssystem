@@ -183,11 +183,24 @@ public class AirportFacade {
 		em.persist(airplaneType);
 		
 	}
+	/**
+	 * Return all airplane type objects from the database.
+	 * @author Benjamin Rupp <beruit01@hs-esslingen.de>
+	 * @return List with all airplane type objects stored in the database.
+	 */
+	@SuppressWarnings("unchecked")
+	public List<AirplaneType> getAirplaneTypes() {
+		
+		Query query = em.createQuery("select e from airplaneType e order by e.id");
+		return query.getResultList();
+		
+	}
 	
 	/**
 	 * Print current airplane types to console.
 	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
 	 */
+	// TODO: Remove this. Only for testing!
 	public void printAirplaneTypes() {
 		
 		System.out.println("\nAirplane types\n--------------------------------");

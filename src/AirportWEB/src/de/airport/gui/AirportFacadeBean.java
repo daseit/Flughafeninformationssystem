@@ -184,6 +184,15 @@ public class AirportFacadeBean {
 	}
 	
 	/**
+	 * Return all airplane type objects from the database.
+	 * @author Benjamin Rupp <beruit01@hs-esslingen.de>
+	 * @return List with all airplane type objects stored in the database.
+	 */
+	public List<AirplaneType> getAirplaneTypes() {
+		return facade.getAirplaneTypes();
+	}
+	
+	/**
 	 * Remove airplane from system (database).
 	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
 	 * @return Empty string for JSF command button.

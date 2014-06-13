@@ -86,5 +86,11 @@
 			| <h:outputText value="#{current.id}" /> |
 		</ui:repeat>
 		
+		<br/>
+		<h3 style="display: inline">Airplane types:  </h3>			
+		<ui:repeat var="current" value="#{airportFacadeBean.getAirplaneTypes()}">
+			| <h:outputText value="#{current.name}" /> (<h:outputText value="#{current.id}" />) |
+		</ui:repeat>
+		
 	</h:body>
 </html>
