@@ -1,6 +1,7 @@
 package de.airport.ejb.model;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 import javax.persistence.*;
 
@@ -12,6 +13,8 @@ public class Airplane implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 5850955168988007782L;
+	
+	//-------- Attributes --------------------------------------------------------------------
 
 	@javax.persistence.Id
     @javax.persistence.GeneratedValue(strategy=GenerationType.AUTO)
@@ -41,6 +44,12 @@ public class Airplane implements Serializable {
 	
 	public enum State { IN_QUEUE, IN_APPROACH, ACCEPTED, LANDED, PARKING }
 	private State state;
+	
+	private Date estimatedLandingTime;
+	
+	private Date actualLandingTime;
+	
+	//-------- Getters and setters --------------------------------------------------------------
 	
 	public Airline getAirline() {
 		return airline;
@@ -100,6 +109,22 @@ public class Airplane implements Serializable {
 
 	public void setState(State state) {
 		this.state = state;
+	}
+	
+	public Date getEstimatedLandingTime() {
+		return estimatedLandingTime;
+	}
+
+	public void setEstimatedLandingTime(Date estimatedLandingTime) {
+		this.estimatedLandingTime = estimatedLandingTime;
+	}
+	
+	public Date getActualLandingTime() {
+		return actualLandingTime;
+	}
+
+	public void setActualLandingTime(Date actualLandingTime) {
+		this.actualLandingTime = actualLandingTime;
 	}
 	
 }
