@@ -17,7 +17,7 @@ public class ParkingPosition implements Serializable {
     @javax.persistence.GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.DETACH)
 	@JoinColumn(name="airplane_id")
 	private Airplane airplane;
 	

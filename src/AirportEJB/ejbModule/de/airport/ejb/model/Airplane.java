@@ -28,15 +28,15 @@ public class Airplane implements Serializable {
 	@JoinColumn(name="airplane_type")
 	private AirplaneType airplaneType;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.DETACH)
 	@JoinColumn(name="flight_controller")
 	private FlightController flightController;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.DETACH)
 	@JoinColumn(name="runway_id")
 	private Runway runway;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.DETACH)
 	@JoinColumn(name="parkingPosition_id")
 	private ParkingPosition parkingPosition;
 	

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
 
@@ -27,7 +28,7 @@ public class FlightController implements Serializable {
 	
 	private String password;
 	
-	@OneToMany(mappedBy="flightController")
+	@OneToMany(cascade=CascadeType.DETACH, mappedBy="flightController")
 	private List<Airplane> airplanes = new ArrayList<Airplane>();
 
 	public String getForname() {
