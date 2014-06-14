@@ -16,8 +16,9 @@ public class Airplane implements Serializable {
 	
 	//-------- Attributes --------------------------------------------------------------------
     
-    @javax.persistence.Id
-	private String airplane_Id;
+	@Id
+	@Column(name="Airplane_Id", unique=true)
+	private String airplaneId;
 	
 	@ManyToOne
 	@JoinColumn(name="airline_id")
@@ -56,12 +57,12 @@ public class Airplane implements Serializable {
 		this.airline = airline;
 	}
 
-	public String getAirplane_Id() {
-		return airplane_Id;
+	public String getAirplaneId() {
+		return airplaneId;
 	}
 
-	public void setAirplane_Id(String airplane_Id) {
-		this.airplane_Id = airplane_Id;
+	public void setAirplaneId(String airplane_Id) {
+		this.airplaneId = airplane_Id;
 	}
 
 	public AirplaneType getAirplaneType() {
