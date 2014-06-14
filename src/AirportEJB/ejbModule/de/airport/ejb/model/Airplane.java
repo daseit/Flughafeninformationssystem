@@ -15,12 +15,9 @@ public class Airplane implements Serializable {
 	private static final long serialVersionUID = 5850955168988007782L;
 	
 	//-------- Attributes --------------------------------------------------------------------
-
-	@javax.persistence.Id
-    @javax.persistence.GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
     
-	private String name;
+    @javax.persistence.Id
+	private String airplane_Id;
 	
 	@ManyToOne
 	@JoinColumn(name="airline_id")
@@ -59,16 +56,12 @@ public class Airplane implements Serializable {
 		this.airline = airline;
 	}
 
-	public int getId() {
-		return id;
+	public String getAirplane_Id() {
+		return airplane_Id;
 	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
+
+	public void setAirplane_Id(String airplane_Id) {
+		this.airplane_Id = airplane_Id;
 	}
 
 	public AirplaneType getAirplaneType() {
