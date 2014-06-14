@@ -14,10 +14,7 @@ public class Airline implements Serializable {
 	 */
 	private static final long serialVersionUID = -2101775176751972529L;
 
-	@javax.persistence.Id
-	@javax.persistence.GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
-	
+	@Id
 	private String name;
 	
 	private String address;
@@ -35,10 +32,6 @@ public class Airline implements Serializable {
 
 	public void setAirplanes(List<Airplane> airplanes) {
 		this.airplanes = airplanes;
-	}
-
-	public int getId() {
-		return id;
 	}
 
 	public String getName() {
