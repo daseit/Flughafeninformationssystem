@@ -3,83 +3,113 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-		<div class="panel panel-primary">
-				<div class="panel-heading">
-					<h3 class="panel-title">Flugzeug zuweisen</h3>
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">Flugzeug zuweisen</h3>
+	</div>
+	<div class="panel-body">
+
+		<h:form>
+			<div class="row">
+
+				<label for="selectFlightName" class="col-sm-4 control-label">Flug</label>
+
+				<div class="col-sm-4">
+					<select class="form-control" id="selectFlightName">
+						<option value="TDD-224">One</option>
+						<option value="BC-552">Two</option>
+						<option value="three">Three</option>
+						<option value="four">Four</option>
+						<option value="five">Five</option>
+					</select>
 				</div>
-				<div class="panel-body">
 
-					<form class="form-horizontal" role="form">
-						<div class="form-group">
-
-							<label for="selectFlightName" class="col-sm-4 control-label">Flug</label>
-
-							<div class="col-sm-4">
-								<select class="form-control" id="selectFlightName">
-									<option value="TDD-224">One</option>
-									<option value="BC-552">Two</option>
-									<option value="three">Three</option>
-									<option value="four">Four</option>
-									<option value="five">Five</option>
-								</select>
-							</div>
-
-						</div>
-					</form>
-
-					<form class="form-horizontal" role="form">
-						<div class="form-group">
-
-							<label for="selectRunway" class="col-sm-4 control-label">Landebahn</label>
-
-							<div class="col-sm-4">
-								<select class="form-control" id="selectRunway">
-									<option value="one">One</option>
-									<option value="two">Two</option>
-									<option value="three">Three</option>
-									<option value="four">Four</option>
-									<option value="five">Five</option>
-								</select>
-							</div>
-
-						</div>
-					</form>
-
-					<form class="form-horizontal" role="form">
-						<div class="form-group">
-
-							<label for="selecParkingPosition" class="col-sm-4 control-label">Parkposition</label>
-
-							<div class="col-sm-4">
-								<select class="form-control" id="selecParkingPosition">
-									<option value="one">One</option>
-									<option value="two">Two</option>
-									<option value="three">Three</option>
-									<option value="four">Four</option>
-
-								</select>
-							</div>
-
-						</div>
-					</form>
-					<form class="form-horizontal" role="form">
-						<div class="form-group row">
-							<div id="buttons" style="float: left">
-								<button class="btn btn-danger" data-toggle="" data-target="#">Landung
-									verweigern</button>
-							</div>
-
-							<div id="buttons" style="float: right">
-								<button class="btn btn-success" data-toggle="" data-target="#">Landung
-									bestätigen</button>
-							</div>
-
-						</div>
-					</form>
-
-
-				</div>
 			</div>
+
+
+
+			<div class="row">
+
+				<label for="selectRunway" class="col-sm-4 control-label">Landebahn</label>
+
+				<div class="col-sm-4">
+					<select class="form-control" id="selectRunway">
+						<option value="one">One</option>
+						<option value="two">Two</option>
+						<option value="three">Three</option>
+						<option value="four">Four</option>
+						<option value="five">Five</option>
+					</select>
+				</div>
+
+			</div>
+
+
+
+			<div class="row">
+
+				<label for="selecParkingPosition" class="col-sm-4 control-label">Parkposition</label>
+
+				<div class="col-sm-4">
+					<select class="form-control" id="selecParkingPosition">
+						<option value="one">One</option>
+						<option value="two">Two</option>
+						<option value="three">Three</option>
+						<option value="four">Four</option>
+
+					</select>
+				</div>
+
+			</div>
+			<!-- Set reservation period -->
+			<div class="row">
+				<label class="col-sm-4 control-label">Reservieren von:</label>
+
+				<div class="col-sm-5" style="padding-right: 0">
+					<div style="clear: both"></div>
+					<div>
+						<div class="input-append date datepicker no-padding"
+							style="float: left; width: 45%" data-date-format="dd.mm.yyyy">
+							<input style="float: left;" class="input-medium form-control"
+								size="6" type="text" /><span class="add-on"><i
+								class="icon-th"></i></span>
+
+						</div>
+					</div>
+
+					<div>
+
+						<div class="input-group clockpicker"
+							style="float: right; width: 45%">
+							<input type="text" class="form-control" value="18:00" size="8" />
+							<span class="input-group-addon"> <span
+								class="glyphicon glyphicon-time"></span>
+							</span>
+						</div>
+					</div>
+
+				</div>
+
+
+			</div>
+			
+			<div class="row">
+				<div id="buttons" style="float: left">
+					<button class="btn btn-danger" data-toggle="" data-target="#">Landung
+						verweigern</button>
+				</div>
+
+				<div id="buttons" style="float: right">
+					<button class="btn btn-success" data-toggle="" data-target="#">Landung
+						bestätigen</button>
+				</div>
+
+			</div>
+		</h:form>
+
+
+	</div>
+</div>
 
 
 </html>

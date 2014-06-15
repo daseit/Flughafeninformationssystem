@@ -1,9 +1,12 @@
-var input = $('#input-a');
-input.clockpicker({
-	autoclose : true,
-	'default' : 'now',
 
+$('.clockpicker').clockpicker({
+	placement : 'bottom',
+	align : 'left',
+	donetext : 'Done',
+	autoclose : true,
+	'default' : 'now'
 });
+
 $(document).ready(function() {
 	// adding todays date as the value to the datepickers.
 	var d = new Date();
@@ -25,10 +28,3 @@ $(document).ready(function() {
 	});
 });
 
-$('.clockpicker').clockpicker({
-	placement : 'bottom',
-	align : 'left',
-	donetext : 'Done',
-	autoclose : true,
-	'default' : 'now'
-});

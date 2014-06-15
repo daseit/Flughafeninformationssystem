@@ -7,7 +7,7 @@
 
 <h:head>
 	<link href="/airport/resources/css/bootstrap.min.css" rel="stylesheet"></link>
-	
+
 	<link href="/airport/resources/custom-template.css" rel="stylesheet" />
 	<link
 		href="/airport/resources/Date_Time_Picker/jquery-clockpicker.min.css"
@@ -50,9 +50,6 @@
 
 			<ui:include src="/templates/airplanedetails.tpl.xhtml" />
 
-
-
-
 			<!-- /.container -->
 		</div>
 
@@ -62,19 +59,34 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h3 class="panel-title">Warteschleife</h3>
+
 				</div>
-				<div class="panel-body"></div>
+				<div class="panel-body">
+					<h:dataTable value="#{airportFacadeBean.queue}" var="Airplane"
+						id="queuetable" class="table">
+						<h:column>
+							<f:facet name="header">#</f:facet>
+					   				#{Airplane.id}
+					   			</h:column>
+						<h:column>
+							<f:facet name="header">Name</f:facet>
+					   				#{Airplane.name}
+				   				</h:column>
+						<h:column>
+							<f:facet name="header">Airline</f:facet>
+					   				#{Airplane.airline}
+				   				</h:column>
+					</h:dataTable>
+
+
+				</div>
 			</div>
 		</div>
 
 
-		<!-- Flugzeug zuweisen Container -->
+		<!-- Assign airplane Container -->
 		<div class="col-sm-8">
 			<ui:include src="/templates/assignairplane.tpl.xhtml" />
-
-
-
-
 
 		</div>
 
@@ -89,14 +101,38 @@
 			</div>
 		</div>
 
-		<!-- Parkpositionen Container -->
+		<!-- parking positions Container -->
 		<div class="col-sm-3">
 
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h3 class="panel-title">Parkpositionen</h3>
 				</div>
-				<div class="panel-body"></div>
+				<div class="panel-body">
+
+					<h:dataTable value="#{airportFacadeBean.parkingPositions}"
+						var="ParkingPostion" id="parkingpositiontable" class="table">
+						<h:column>
+							<f:facet name="header">#</f:facet>
+					   				#{ParkingPostion.id}
+					   			</h:column>
+						<h:column>
+							<f:facet name="header">Name</f:facet>
+					   				#{ParkingPostion.airplane}
+				   				</h:column>
+						<h:column>
+							<f:facet name="header">Airline</f:facet>
+					   				#{ParkingPostion.reservationTimeStart}
+				   				</h:column>
+						<h:column>
+							<f:facet name="header">Airline</f:facet>
+					   				#{ParkingPostion.reservationTimeEnd}
+				   				</h:column>
+					</h:dataTable>
+
+
+
+				</div>
 			</div>
 		</div>
 
@@ -118,6 +154,8 @@
 
 	<script src="/airport/resources/jquery-2.1.1.min.js"></script>
 	<script src="/airport/resources/bootstrap.min.js"></script>
+	<script src="/airport/resources/javascript.js"></script>
+
 	<script
 		src="/airport/resources/Date_Time_Picker/jquery-clockpicker.min.js"></script>
 	<script src="/airport/resources/Date_Time_Picker/customClockpicker.js"></script>
