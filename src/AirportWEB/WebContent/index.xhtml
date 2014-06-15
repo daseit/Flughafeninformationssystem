@@ -43,110 +43,166 @@
 
 	<div class="container">
 
-
-		<!-- Flugzeug Details -->
-		<div class="col-sm-8">
+		<div class="col-sm-7">
 
 
+			<!-- Register airplane -->
 			<ui:include src="/templates/airplanedetails.tpl.xhtml" />
 
-			<!-- /.container -->
-		</div>
 
-		<!-- Warteschleife Container -->
-		<div class="col-sm-3">
-
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<h3 class="panel-title">Warteschleife</h3>
-
-				</div>
-				<div class="panel-body">
-					<h:dataTable value="#{airportFacadeBean.queue}" var="Airplane"
-						id="queuetable" class="table">
-						<h:column>
-							<f:facet name="header">#</f:facet>
-					   				#{Airplane.id}
-					   			</h:column>
-						<h:column>
-							<f:facet name="header">Name</f:facet>
-					   				#{Airplane.name}
-				   				</h:column>
-						<h:column>
-							<f:facet name="header">Airline</f:facet>
-					   				#{Airplane.airline}
-				   				</h:column>
-					</h:dataTable>
-
-
-				</div>
-			</div>
-		</div>
-
-
-		<!-- Assign airplane Container -->
-		<div class="col-sm-8">
+			<!-- Assign airplane Container -->
 			<ui:include src="/templates/assignairplane.tpl.xhtml" />
 
+
+
+
 		</div>
 
-		<!-- Landebahnen Container -->
-		<div class="col-sm-3">
+		<!-- Information tables -->
+		<div class="col-sm-4">
 
+			<!-- Registered planes -->
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<h3 class="panel-title">Landebahnen</h3>
+					<h3 class="panel-title">
+
+						<a data-toggle="collapse" data-parent="#accordion"
+							href="#collapseRegisteredAirplane">Angemeldete Flugzeuge </a>
+					</h3>
+
 				</div>
-				<div class="panel-body"></div>
+				<div id="collapseRegisteredAirplane"
+					class="panel-collapse collapse in">
+					<div class="panel-body">
+						<h:dataTable value="#{airportFacadeBean.queue}" var="Airplane"
+							id="registeredAirplanesTable" class="table">
+							<h:column>
+								<f:facet name="header">Name</f:facet>
+					   				#{Airplane.id}
+					   	</h:column>
+							<h:column>
+								<f:facet name="header">Airline</f:facet>
+					   				#{Airplane.airline}
+				   		</h:column>
+							<h:column>
+								<f:facet name="header">State</f:facet>
+					   				#{Airplane.state}
+				   		</h:column>
+							<h:column>
+								<f:facet name="header">Lotse</f:facet>
+					   				#{Airplane.flightController}
+				   		</h:column>
+						</h:dataTable>
+
+
+					</div>
+				</div>
 			</div>
-		</div>
 
-		<!-- parking positions Container -->
-		<div class="col-sm-3">
-
+			<!-- Queue -->
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<h3 class="panel-title">Parkpositionen</h3>
-				</div>
-				<div class="panel-body">
+					<h3 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion"
+							href="#collapseQueue">Warteschleife</a>
+					</h3>
 
-					<h:dataTable value="#{airportFacadeBean.parkingPositions}"
-						var="ParkingPostion" id="parkingpositiontable" class="table">
-						<h:column>
-							<f:facet name="header">#</f:facet>
+				</div>
+				<div id="collapseQueue" class="panel-collapse collapse in">
+					<div class="panel-body">
+						<h:dataTable value="#{airportFacadeBean.queue}" var="Airplane"
+							id="queuetable" class="table">
+							<h:column>
+								<f:facet name="header">#</f:facet>
+					   				#{Airplane.id}
+					   			</h:column>
+							<h:column>
+								<f:facet name="header">Name</f:facet>
+					   				#{Airplane.name}
+				   				</h:column>
+							<h:column>
+								<f:facet name="header">Airline</f:facet>
+					   				#{Airplane.airline}
+				   				</h:column>
+						</h:dataTable>
+
+
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+			<!-- Runways -->
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion"
+							href="#collapseRunways">Landebahnen</a>
+					</h3>
+				</div>
+				<div id="collapseRunways" class="panel-collapse collapse in">
+					<div class="panel-body">
+						<h:dataTable value="#{airportFacadeBean.runways}" var="Runway"
+							id="runwaytable" class="table">
+							<h:column>
+								<f:facet name="header">#</f:facet>
+					   				#{Runway.id}
+					   	</h:column>
+							<h:column>
+								<f:facet name="header">Airplane</f:facet>
+					   				#{Runway.airplane}
+				   		</h:column>
+							<h:column>
+								<f:facet name="header">Landung um</f:facet>
+					   				#{Runway.reservationTimeStart}
+				   		</h:column>
+						</h:dataTable>
+
+					</div>
+				</div>
+			</div>
+
+			<!-- parking positions  -->
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion"
+							href="#collapseParkingPositions">Parkplätze</a>
+					</h3>
+				</div>
+				<div id="collapseParkingPositions"
+					class="panel-collapse collapse in">
+					<div class="panel-body">
+
+						<h:dataTable value="#{airportFacadeBean.parkingPositions}"
+							var="ParkingPostion" id="parkingpositiontable" class="table">
+							<h:column>
+								<f:facet name="header">#</f:facet>
 					   				#{ParkingPostion.id}
 					   			</h:column>
-						<h:column>
-							<f:facet name="header">Name</f:facet>
+							<h:column>
+								<f:facet name="header">Name</f:facet>
 					   				#{ParkingPostion.airplane}
 				   				</h:column>
-						<h:column>
-							<f:facet name="header">Airline</f:facet>
+							<h:column>
+								<f:facet name="header">Belegt von</f:facet>
 					   				#{ParkingPostion.reservationTimeStart}
 				   				</h:column>
-						<h:column>
-							<f:facet name="header">Airline</f:facet>
+							<h:column>
+								<f:facet name="header">bis</f:facet>
 					   				#{ParkingPostion.reservationTimeEnd}
 				   				</h:column>
-					</h:dataTable>
-
-
-
+						</h:dataTable>
+					</div>
 				</div>
 			</div>
-		</div>
-
-
-
-		<!-- Aktuelle Flüge Container -->
-		<div class="col-sm-8">
-
-
-
-			<ui:include src="/templates/flights.tpl.xhtml" />
-
 
 		</div>
+
+
 
 
 	</div>
