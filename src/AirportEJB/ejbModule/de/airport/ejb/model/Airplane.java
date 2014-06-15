@@ -1,6 +1,7 @@
 package de.airport.ejb.model;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 import javax.persistence.*;
 
@@ -12,12 +13,12 @@ public class Airplane implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 5850955168988007782L;
-
-	@javax.persistence.Id
-    @javax.persistence.GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	
+	//-------- Attributes --------------------------------------------------------------------
     
-	private String name;
+	@Id
+	@Column(name="Airplane_Id", unique=true)
+	private String airplaneId;
 	
 	@ManyToOne
 	@JoinColumn(name="airline_id")
@@ -39,12 +40,14 @@ public class Airplane implements Serializable {
 	@JoinColumn(name="parkingPosition_id")
 	private ParkingPosition parkingPosition;
 	
-	@OneToOne
-	@JoinColumn(name="flight_id")
-	private Flight flight;
-	
 	public enum State { IN_QUEUE, IN_APPROACH, ACCEPTED, LANDED, PARKING }
 	private State state;
+	
+	private Date estimatedLandingTime;
+	
+	private Date actualLandingTime;
+	
+	//-------- Getters and setters --------------------------------------------------------------
 	
 	public Airline getAirline() {
 		return airline;
@@ -54,16 +57,12 @@ public class Airplane implements Serializable {
 		this.airline = airline;
 	}
 
-	public int getId() {
-		return id;
+	public String getAirplaneId() {
+		return airplaneId;
 	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
+
+	public void setAirplaneId(String airplane_Id) {
+		this.airplaneId = airplane_Id;
 	}
 
 	public AirplaneType getAirplaneType() {
@@ -98,20 +97,28 @@ public class Airplane implements Serializable {
 		this.flightController = flightController;
 	}
 
-	public Flight getFlight() {
-		return flight;
-	}
-
-	public void setFlight(Flight flight) {
-		this.flight = flight;
-	}
-
 	public State getState() {
 		return state;
 	}
 
 	public void setState(State state) {
 		this.state = state;
+	}
+	
+	public Date getEstimatedLandingTime() {
+		return estimatedLandingTime;
+	}
+
+	public void setEstimatedLandingTime(Date estimatedLandingTime) {
+		this.estimatedLandingTime = estimatedLandingTime;
+	}
+	
+	public Date getActualLandingTime() {
+		return actualLandingTime;
+	}
+
+	public void setActualLandingTime(Date actualLandingTime) {
+		this.actualLandingTime = actualLandingTime;
 	}
 	
 }
