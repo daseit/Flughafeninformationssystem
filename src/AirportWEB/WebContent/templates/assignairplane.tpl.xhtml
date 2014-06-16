@@ -92,7 +92,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="row">
+					<!-- <div class="row"> -->
 						<label class="col-sm-4 control-label">bis:</label>
 
 						<div class="col-sm-5" style="padding-right: 0">
@@ -116,19 +116,28 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					<!-- </div> -->
 
 				</div>
 
+				<!-- Buttons -->
 				<div class="row">
-					<div id="buttons" style="float: left">
+					<div class="col-sm-4">
 
 						<h:commandButton class="btn btn-danger"
 							action="#{airportFacadeBean.cancelLanding}"
 							value="Landung verweigern" />
 					</div>
+					<div class="col-sm-4">
 
-					<div id="buttons" style="float: right">
+						<h:commandButton class="btn btn-warning"
+							action="#{airportFacadeBean.orderQueue}"
+							value="In Warteschleife" />
+					</div>
+
+
+
+					<div  class="col-sm-3">
 						<h:commandButton class="btn btn-success"
 							action="#{airportFacadeBean.acceptAirplane}"
 							value="Landung bestätigen" />

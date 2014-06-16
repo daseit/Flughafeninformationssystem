@@ -56,11 +56,6 @@
 
 
 
-		</div>
-
-		<!-- Information tables -->
-		<div class="col-sm-4">
-
 			<!-- Registered planes -->
 			<div class="panel panel-primary">
 				<div class="panel-heading">
@@ -74,30 +69,72 @@
 				<div id="collapseRegisteredAirplane"
 					class="panel-collapse collapse in">
 					<div class="panel-body">
+					<div class="row">
+						<h:form>
+							<label for="selectFlightName" class="col-sm-4 control-label">Flug</label>
+
+							<div class="col-sm-4">
+								<h:selectOneMenu class="form-control">
+									<!-- WIP should be another method (instead of Queue) -->
+									<f:selectItems value="#{airportFacadeBean.queue}"
+										var="Airplane" itemValue="#{Airplane.airplaneId}"
+										itemLabel="#{Airplane.airplaneId}" />
+								</h:selectOneMenu>
+							</div>
+
+							<h:commandButton class="btn btn-success"
+								action="#{airportFacadeBean.addAirline}"
+								value="Nächster Status" />
+						</h:form>
+</div>
+
 						<h:dataTable value="#{airportFacadeBean.queue}" var="Airplane"
 							id="registeredAirplanesTable" class="table">
-							<h:column>
-								<f:facet name="header">Name</f:facet>
-					   				#{Airplane.id}
-					   	</h:column>
-							<h:column>
-								<f:facet name="header">Airline</f:facet>
+						
+								<h:column>
+									<f:facet name="header">Name</f:facet>
+									<h:outputText value="id" /> #{Airplane.id}
+					   			</h:column>
+								<h:column>
+									<f:facet name="header">Airline</f:facet>
 					   				#{Airplane.airline}
-				   		</h:column>
-							<h:column>
-								<f:facet name="header">State</f:facet>
-					   				#{Airplane.state}
-				   		</h:column>
-							<h:column>
+				   				</h:column>
+
+								<!--  <h:column>
 								<f:facet name="header">Lotse</f:facet>
 					   				#{Airplane.flightController}
 				   		</h:column>
+				   		-->
+								<h:column>
+									<f:facet name="header">Geplant</f:facet>
+					   				#{Airplane.estimatedLandingTime}
+				   				</h:column>
+							<!--  	<h:column>
+									<f:facet name="header">Gelandet</f:facet>
+					   				#{Airplane.actualLandingTime}
+				   				</h:column>-->
+								<h:column>
+									<f:facet name="header">Status</f:facet>
+					   				#{Airplane.state}
+						
+								</h:column>
+
+
 						</h:dataTable>
 
 
 					</div>
 				</div>
 			</div>
+
+
+
+
+		</div>
+
+		<!-- Information tables -->
+		<div class="col-sm-4">
+
 
 			<!-- Queue -->
 			<div class="panel panel-primary">
