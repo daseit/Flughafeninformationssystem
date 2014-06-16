@@ -1,7 +1,7 @@
 package de.airport.ejb.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.*;
 
