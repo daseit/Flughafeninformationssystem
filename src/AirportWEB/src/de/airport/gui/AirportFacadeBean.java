@@ -22,7 +22,7 @@ public class AirportFacadeBean {
 	private String airplaneTypeName;
 	private String addAirplaneAirlineName;
 	private int flightControllerId;
-	private int airplaneId;
+	private String airplaneId;
 	
 	// add new airline
 	private String airlineName;
@@ -33,7 +33,7 @@ public class AirportFacadeBean {
 	
 	// reserve runway
 	private int runwayId;
-	private int runwayAirplaneId;
+	private String runwayAirplaneId;
 	private String runwayReservationStartDate;
 	private String runwayReservationStartTime;
 	
@@ -44,16 +44,16 @@ public class AirportFacadeBean {
 	private String parkingPositionReservationStartTime;
 	
 	// order queue
-	private int orderQueueAirplaneId;
+	private String orderQueueAirplaneId;
 	
 	// cancel landing
-	private int cancelLandingAirplaneId;
+	private String cancelLandingAirplaneId;
 	
 	// release runway
 	private int releaseRunwayId;
 	
 	// set next state
-	private int nextStateAirplaneId;
+	private String nextStateAirplaneId;
 
 	@EJB
 	private AirportFacade facade;
@@ -298,8 +298,8 @@ public class AirportFacadeBean {
 		facade.printAirplaneTypes();
 		
 		System.out.println("\nCreate airplanes");
-		facade.addAirplane("Boeing 747", "myAirline", 1, 123);
-		facade.addAirplane("Boeing 747", "AirStefaan", 2, 123);
+		facade.addAirplane("Boeing 747", "myAirline", 1, "HS1234");
+		facade.addAirplane("Boeing 747", "AirStefaan", 2, "HS4711");
 		return "";
 	}
 	/**
@@ -365,10 +365,10 @@ public class AirportFacadeBean {
 	public void setRunwayId(int runwayId) {
 		this.runwayId = runwayId;
 	}
-	public int getRunwayAirplaneId() {
+	public String getRunwayAirplaneId() {
 		return runwayAirplaneId;
 	}
-	public void setRunwayAirplaneId(int runwayAirplaneId) {
+	public void setRunwayAirplaneId(String runwayAirplaneId) {
 		this.runwayAirplaneId = runwayAirplaneId;
 	}
 	public String getRunwayReservationStartDate() {
@@ -377,10 +377,10 @@ public class AirportFacadeBean {
 	public void setRunwayReservationStartDate(String runwayReservationStartDate) {
 		this.runwayReservationStartDate = runwayReservationStartDate;
 	}
-	public int getAirplaneId() {
+	public String getAirplaneId() {
 		return airplaneId;
 	}
-	public void setAirplaneId(int airplaneId) {
+	public void setAirplaneId(String airplaneId) {
 		this.airplaneId = airplaneId;
 	}
 	public int getParkingPositionId() {
@@ -402,16 +402,16 @@ public class AirportFacadeBean {
 			String parkingPositionReservationStartDate) {
 		this.parkingPositionReservationStartDate = parkingPositionReservationStartDate;
 	}
-	public int getOrderQueueAirplaneId() {
+	public String getOrderQueueAirplaneId() {
 		return orderQueueAirplaneId;
 	}
-	public void setOrderQueueAirplaneId(int orderQueueAirplaneId) {
+	public void setOrderQueueAirplaneId(String orderQueueAirplaneId) {
 		this.orderQueueAirplaneId = orderQueueAirplaneId;
 	}
-	public int getCancelLandingAirplaneId() {
+	public String getCancelLandingAirplaneId() {
 		return cancelLandingAirplaneId;
 	}
-	public void setCancelLandingAirplaneId(int cancelLandingAirplaneId) {
+	public void setCancelLandingAirplaneId(String cancelLandingAirplaneId) {
 		this.cancelLandingAirplaneId = cancelLandingAirplaneId;
 	}
 	public int getReleaseRunwayId() {
@@ -439,10 +439,10 @@ public class AirportFacadeBean {
 	public void setAddAirplaneTypeName(String addAirplaneTypeName) {
 		this.addAirplaneTypeName = addAirplaneTypeName;
 	}
-	public int getNextStateAirplaneId() {
+	public String getNextStateAirplaneId() {
 		return nextStateAirplaneId;
 	}
-	public void setNextStateAirplaneId(int nextStateAirplaneId) {
+	public void setNextStateAirplaneId(String nextStateAirplaneId) {
 		this.nextStateAirplaneId = nextStateAirplaneId;
 	}
 	

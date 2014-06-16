@@ -19,3 +19,13 @@
 </h:dataTable>
 
 
+
+
+Funktioniert:
+					<a class="col-sm-1 btn btn-default" data-toggle="modal" data-target="#addAirlinePopover">+</a>
+
+
+
+Dialog verschwindet sofort wieder (SPITZE!):					
+					<button class="col-sm-1 btn btn-default" data-toggle="modal"
+						data-target="#addAirlinePopover">+</button>
