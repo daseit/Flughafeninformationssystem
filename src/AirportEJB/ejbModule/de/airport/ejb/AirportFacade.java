@@ -34,7 +34,7 @@ public class AirportFacade {
 	 * @param airlineName Unique airline name.
 	 * @param flightControllerId Unique flight controller identifier.
 	 */
-	public void addAirplane(String airplaneTypeName, String airlineName, int flightControllerId, int id) {
+	public void addAirplane(String airplaneTypeName, String airlineName, int flightControllerId, String id) {
 		
 		Airplane airplane = new Airplane();
 		airplane.setState(Airplane.State.IN_APPROACH);
@@ -45,7 +45,7 @@ public class AirportFacade {
 		Query qAirline = em.createQuery("select e from airline e where e.name = '" + airlineName + "'");
 		Query qFlightController = em.createQuery("select e from flightController e where e.id = '" + flightControllerId + "'");
 		
-		// airplane
+		// airplane type
 		if( qAirplaneType.getResultList().size() > 0) {
 			AirplaneType airplaneType = (AirplaneType) qAirplaneType.getResultList().get(0);
 			airplane.setAirplaneType(airplaneType);
@@ -73,14 +73,13 @@ public class AirportFacade {
 		}
 		
 		// id
-		// TODO: The Airplane class should have id as primary key without auto increment. (issue #13)
-		//airplane.setId(id);
+		airplane.setAirplaneId(id);
 		
 		
 		// write to database
 		em.persist(airplane);
 		
-		System.out.println("[AirportFacade][addAirplane] Added new airplane " + airplane.getName() +
+		System.out.println("[AirportFacade][addAirplane] Added new airplane " + airplane.getAirplaneId() +
 				" to airline " + airplane.getAirline().getName());
 		
 	}
@@ -94,11 +93,11 @@ public class AirportFacade {
 		Query q = em.createQuery("select e from airplane e order by e.id");
 		
 		System.out.println("\nAirplanes\n--------------------------------");
-		System.out.println("id \tname \tairline \ttype \t\tcontroller \trunway \tparking \tstatus");
+		System.out.println("id \tairline \ttype \t\tcontroller \trunway \tparking \tstatus");
 		
 		for(Airplane a : (List<Airplane>) q.getResultList()) {
 			
-			System.out.print("#" + a.getId() + "\t" + a.getName() + "\t" + a.getAirline().getName() + "\t" + a.getAirplaneType().getName() + "\t" +
+			System.out.print("#" + a.getAirplaneId() + "\t" + a.getAirline().getName() + "\t" + a.getAirplaneType().getName() + "\t" +
 								a.getFlightController().getId());
 			
 			if( a.getRunway() == null ) {
@@ -123,7 +122,7 @@ public class AirportFacade {
 	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
 	 * @param airplaneId Unique airplane identifier.
 	 */
-	public void nextState(int airplaneId) {
+	public void nextState(String airplaneId) {
 		
 		Query qCurrentState = em.createQuery("select e from airplane e where e.id = '" + airplaneId + "'");
 		
@@ -213,7 +212,7 @@ public class AirportFacade {
 		
 		for(Airline a : (List<Airline>) q.getResultList()) {
 			
-			System.out.println("#" + a.getId() + "\t" + a.getName() + "\t" + a.getAddress());
+			System.out.println("#" + a.getName() + "\t" + a.getAddress());
 			
 		}
 	}
@@ -263,7 +262,7 @@ public class AirportFacade {
 		
 		for(AirplaneType at : (List<AirplaneType>) q.getResultList()) {
 			
-			System.out.println("#" + at.getId() + "\t" + at.getName());
+			System.out.println("#" + at.getName());
 			
 		}
 	}
@@ -349,7 +348,7 @@ public class AirportFacade {
 						r.getReservationTimeEnd() + "\t");
 			
 			if(r.getAirplane() == null) System.out.print("-\n");
-			else System.out.print(r.getAirplane().getName() + "\n");
+			else System.out.print(r.getAirplane().getAirplaneId() + "\n");
 		}
 		
 		return "";
@@ -362,7 +361,7 @@ public class AirportFacade {
 	 * @param reservationStartTime Reservation start time.
 	 * @param airplaneId Unique airplane identifier.
 	 */
-	public void reserveRunway(int runwayId, Date reservationStartTime, int airplaneId) {
+	public void reserveRunway(int runwayId, Date reservationStartTime, String airplaneId) {
 		
 		// modify runway object in database
 		Query qRunway = em.createQuery("update runway set airplane = '" + airplaneId + "'" +
@@ -421,7 +420,7 @@ public class AirportFacade {
 						p.getReservationTimeEnd() + "\t");
 			
 			if(p.getAirplane() == null) System.out.print("-\n");
-			else System.out.print(p.getAirplane().getName() + "\n");
+			else System.out.print(p.getAirplane().getAirplaneId() + "\n");
 		}
 		
 		return "";
@@ -456,7 +455,7 @@ public class AirportFacade {
 	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
 	 * @param airplaneId
 	 */
-	public void orderQueue(int airplaneId) {
+	public void orderQueue(String airplaneId) {
 		
 		int inQueueInt = Airplane.State.IN_QUEUE.ordinal();
 		
@@ -491,7 +490,7 @@ public class AirportFacade {
 	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
 	 * @param airplaneId
 	 */
-	public void cancelLanding(int airplaneId) {
+	public void cancelLanding(String airplaneId) {
 		
 		// TODO: Release runway and parking position?
 		// TODO: Remove airplane from flight controller?

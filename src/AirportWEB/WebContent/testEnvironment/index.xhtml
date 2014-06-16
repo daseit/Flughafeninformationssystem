@@ -33,8 +33,8 @@
 			Airplane type name: <h:inputText value="#{airportFacadeBean.airplaneTypeName}"/>
 			Airline name: <h:inputText value="#{airportFacadeBean.addAirplaneAirlineName}"/>
 			Flight controller id: <h:inputText value="#{airportFacadeBean.flightControllerId}"/>
-			<!-- Name: <h:inputText value="#{airportFacadeBean.airplaneId}"/> -->
-			<h:commandButton action="#{airportFacadeBean.registerAirplane}" value="register airplane" disabled="true"/>
+			Name: <h:inputText value="#{airportFacadeBean.airplaneId}"/>
+			<h:commandButton action="#{airportFacadeBean.registerAirplane}" value="register airplane"/>
 		</h:form>
 		
 		<b>Reserve Runway</b>
@@ -97,13 +97,13 @@
 		<hr/>
 		<h3 style="display: inline">IN_QUEUE:  </h3>			
 		<ui:repeat var="current" value="#{airportFacadeBean.getQueue()}">
-			| <h:outputText value="#{current.id}" /> |
+			| <h:outputText value="#{current.airplaneId}" /> |
 		</ui:repeat>
 		
 		<br/>
 		<h3 style="display: inline">Airplane types:  </h3>			
 		<ui:repeat var="current" value="#{airportFacadeBean.getAirplaneTypes()}">
-			| <h:outputText value="#{current.name}" /> (<h:outputText value="#{current.id}" />) |
+			| <h:outputText value="#{current.name}" /> |
 		</ui:repeat>
 		
 	</h:body>
