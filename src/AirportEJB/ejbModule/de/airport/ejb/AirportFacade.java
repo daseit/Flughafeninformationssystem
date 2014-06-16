@@ -393,6 +393,19 @@ public class AirportFacade {
 	}
 	
 	/**
+	 * Return all free runways.
+	 * @author Benjamin Rupp <beruit01@hs-esslingen.de>
+	 * @return List with all free runways.
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Runway> getFreeRunways() {
+		
+		Query query = em.createQuery("select e from runway e where e.airplane = null order by e.id");
+		return query.getResultList();
+		
+	}
+	
+	/**
 	 * Print current runway status to console.
 	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
 	 * @return Empty string for JSF command button.
@@ -435,7 +448,22 @@ public class AirportFacade {
 		}
 		
 	}
-
+	/**
+	 * Release reserved runway.
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 * @param runwayId Unique runway id.
+	 */
+	public void releaseRunway(int runwayId) {
+		
+		Query q = em.createQuery("update runway set airplane = null, reservationTimeStart = null, " +
+									"reservationTimeEnd = null where id = '" + runwayId + "'");
+		
+		if(q.executeUpdate() <= 0) {
+			System.out.println("[AirportFacade][releaseRunway] Error: Release runway " +
+					runwayId + " failed! No database update.");
+		}
+		
+	}
 	
 	// parking positions
 	/**
@@ -460,6 +488,18 @@ public class AirportFacade {
 	public List<ParkingPosition> getParkingPositions() {
 		
 		Query query = em.createQuery("select e from parking_position e order by e.id");
+		return query.getResultList();
+		
+	}
+	/**
+	 * Return all free runways.
+	 * @author Benjamin Rupp <beruit01@hs-esslingen.de>
+	 * @return List with all free runways.
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Runway> getFreeParkingPositions() {
+		
+		Query query = em.createQuery("select e from parking_position e where e.airplane = null order by e.id");
 		return query.getResultList();
 		
 	}
@@ -494,7 +534,7 @@ public class AirportFacade {
 	 * @param reservationStartTime Reservation start time.
 	 * @param airplaneId Unique airplane identifier.
 	 */
-	public void reserveParkingPosition(int parkingPositionId, Date reservationStartTime, int airplaneId) {
+	public void reserveParkingPosition(int parkingPositionId, Date reservationStartTime, String airplaneId) {
 		
 		// modify parking position object in database
 		Query qParkingPosition = em.createQuery("update parking_position set airplane = '" + airplaneId + "'" +
@@ -563,20 +603,4 @@ public class AirportFacade {
 		
 	}
 	
-	/**
-	 * Release reserved runway.
-	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
-	 * @param runwayId Unique runway id.
-	 */
-	public void releaseRunway(int runwayId) {
-		
-		Query q = em.createQuery("update runway set airplane = null, reservationTimeStart = null, " +
-									"reservationTimeEnd = null where id = '" + runwayId + "'");
-		
-		if(q.executeUpdate() <= 0) {
-			System.out.println("[AirportFacade][releaseRunway] Error: Release runway " +
-					runwayId + " failed! No database update.");
-		}
-		
-	}
 }

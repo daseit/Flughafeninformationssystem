@@ -48,7 +48,7 @@ public class AirportFacadeBean {
 	
 	// reserve parking position
 	private int parkingPositionId;
-	private int parkingPositionAirplaneId;
+	private String parkingPositionAirplaneId;
 	private String parkingPositionReservationStartDate;
 	private String parkingPositionReservationStartTime;
 	
@@ -113,17 +113,12 @@ public class AirportFacadeBean {
 		
 		// reserve parking position
 		Date date = null;
-		try {
-			// parse date
-			date = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.GERMAN).parse(this.parkingPositionReservationStartDate + " " + this.parkingPositionReservationStartTime);			
-			java.sql.Timestamp sqlDate = new java.sql.Timestamp(date.getTime());
-			
-			// delegate
-			facade.reserveParkingPosition(this.parkingPositionId, sqlDate, this.parkingPositionAirplaneId);
+	
+		// parse date			
+		java.sql.Timestamp sqlDate = parseStringToSQLTimestamp(this.parkingPositionReservationStartDate + " " + this.parkingPositionReservationStartTime);
 		
-		} catch (ParseException e) {
-			System.out.println("[AirportFacadeBean][acceptAirplane] Cannot parse date " + this.parkingPositionReservationStartDate + " " + this.parkingPositionReservationStartTime);
-		}
+		// delegate
+		facade.reserveParkingPosition(this.parkingPositionId, sqlDate, this.parkingPositionAirplaneId);
 		
 		return "";
 	}
@@ -198,6 +193,14 @@ public class AirportFacadeBean {
 		return facade.getRunways();
 		
 	}
+	/**
+	 * Return all free runways.
+	 * @author Benjamin Rupp <beruit01@hs-esslingen.de>
+	 * @return List with all free runways.
+	 */
+	public List<Runway> getFreeRunways() {
+		return facade.getFreeRunways();
+	}
 
 	/**
 	 * Reserve a runway for landing or start of an airplane.
@@ -207,17 +210,12 @@ public class AirportFacadeBean {
 	public String reserveRunway() {
 		
 		Date date = null;
-		try {
-			// parse date
-			date = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.GERMAN).parse(this.runwayReservationStartDate + " " + this.runwayReservationStartTime);			
-			java.sql.Timestamp sqlDate = new java.sql.Timestamp(date.getTime());
-			
-			// delegate
-			facade.reserveRunway(this.runwayId, sqlDate, this.runwayAirplaneId);
 		
-		} catch (ParseException e) {
-			System.out.println("[AirportFacadeBean][reserveRunway] Cannot parse date " + this.runwayReservationStartDate + " " + this.runwayReservationStartTime);
-		}
+		// parse date			
+		java.sql.Timestamp sqlDate = parseStringToSQLTimestamp(this.runwayReservationStartDate + " " + this.runwayReservationStartTime);
+		
+		// delegate
+		facade.reserveRunway(this.runwayId, sqlDate, this.runwayAirplaneId);
 		
 		return "";
 	}
@@ -232,7 +230,14 @@ public class AirportFacadeBean {
 		return facade.getParkingPositions();
 		
 	}
-
+	/**
+	 * Return all free parking positions.
+	 * @author Benjamin Rupp <beruit01@hs-esslingen.de>
+	 * @return List with all free parking positions.
+	 */
+	public List<Runway> getFreeParkingPositions() {
+		return facade.getFreeParkingPositions();
+	}
 	
 	/**
 	 * Set airplane state to IN_QUEUE.
@@ -456,10 +461,10 @@ public class AirportFacadeBean {
 	public void setParkingPositionId(int parkingPositionId) {
 		this.parkingPositionId = parkingPositionId;
 	}
-	public int getParkingPositionAirplaneId() {
+	public String getParkingPositionAirplaneId() {
 		return parkingPositionAirplaneId;
 	}
-	public void setParkingPositionAirplaneId(int parkingPositionAirplaneId) {
+	public void setParkingPositionAirplaneId(String parkingPositionAirplaneId) {
 		this.parkingPositionAirplaneId = parkingPositionAirplaneId;
 	}
 	public String getParkingPositionReservationStartDate() {

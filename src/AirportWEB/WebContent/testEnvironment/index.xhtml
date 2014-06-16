@@ -46,8 +46,7 @@
 			
 			Runway Id: <h:inputText value="#{airportFacadeBean.runwayId}"/>
 			Airplane Id: <h:inputText value="#{airportFacadeBean.runwayAirplaneId}"/>
-			Reservation start date:
-			<h:inputText value="#{airportFacadeBean.runwayReservationStartDate}" />
+			Reservation start date: date<h:inputText value="#{airportFacadeBean.runwayReservationStartDate}" /> time<h:inputText value="#{airportFacadeBean.runwayReservationStartTime}" />
 			<h:commandButton action="#{airportFacadeBean.reserveRunway}" value="reserve runway" />
 			
 		</h:form>
@@ -57,8 +56,7 @@
 			
 			Parking postion Id: <h:inputText value="#{airportFacadeBean.parkingPositionId}"/>
 			Airplane Id: <h:inputText value="#{airportFacadeBean.parkingPositionAirplaneId}"/>
-			Reservation start date:
-			<h:inputText value="#{airportFacadeBean.parkingPositionReservationStartDate}" />
+			Reservation start date: date<h:inputText value="#{airportFacadeBean.parkingPositionReservationStartDate}" /> time<h:inputText value="#{airportFacadeBean.parkingPositionReservationStartTime}" />
 			<h:commandButton action="#{airportFacadeBean.acceptAirplane}" value="reserve parking position" />
 			
 		</h:form>
@@ -103,6 +101,18 @@
 		<h3 style="display: inline">Registered airplanes:  </h3>			
 		<ui:repeat var="current" value="#{airportFacadeBean.getRegisteredAirplanes()}">
 			| <h:outputText value="#{current.airplaneId}" /> |
+		</ui:repeat>
+		
+		<br />
+		<h3 style="display: inline">Free runways:  </h3>			
+		<ui:repeat var="current" value="#{airportFacadeBean.getFreeRunways()}">
+			| <h:outputText value="#{current.id}" /> |
+		</ui:repeat>
+		
+		<br />
+		<h3 style="display: inline">Free parking positions:  </h3>			
+		<ui:repeat var="current" value="#{airportFacadeBean.getFreeParkingPositions()}">
+			| <h:outputText value="#{current.id}" /> |
 		</ui:repeat>
 		
 		<br />
