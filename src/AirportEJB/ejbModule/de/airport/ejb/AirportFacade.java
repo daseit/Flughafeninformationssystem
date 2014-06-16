@@ -220,7 +220,18 @@ public class AirportFacade {
 				" with the following address: " + airline.getAddress());
 	
 	}
-	
+	/**
+	 * Return all airline objects from the database.
+	 * @author Benjamin Rupp <beruit01@hs-esslingen.de>
+	 * @return List with all airline objects stored in the database.
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Airline> getAirlines() {
+		
+		Query query = em.createQuery("select e from airline e order by e.name");
+		return query.getResultList();
+		
+	}
 	/**
 	 * Print current airlines to console.
 	 * @author Benjamin Rupp <beruit01@hs-essingen.de>

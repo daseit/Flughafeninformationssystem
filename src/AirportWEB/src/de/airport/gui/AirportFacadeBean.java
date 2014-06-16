@@ -123,7 +123,7 @@ public class AirportFacadeBean {
 	}
 	
 
-	// TODO: remove this! only for testing.
+	// TODO: remove this method! only for testing.
 	public String printAirplanes() {
 		facade.printAirplanes();
 		return "";
@@ -139,6 +139,16 @@ public class AirportFacadeBean {
 		facade.addAirline(this.airlineName, this.airlineAddress);
 		
 		return "";
+	}
+	/**
+	 * Return all airline objects from the database.
+	 * @author Benjamin Rupp <beruit01@hs-esslingen.de>
+	 * @return List with all airline objects stored in the database.
+	 */
+	public List<Airline> getAirlines() {
+		
+		return facade.getAirlines();
+		
 	}
 	
 	/**

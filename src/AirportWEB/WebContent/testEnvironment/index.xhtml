@@ -97,15 +97,21 @@
 		<h:messages></h:messages>
 		
 		<hr/>
-		<h3 style="display: inline">IN_QUEUE:  </h3>			
-		<ui:repeat var="current" value="#{airportFacadeBean.getQueue()}">
-			| <h:outputText value="#{current.airplaneId}" /> |
+		<h3 style="display: inline">Airlines:  </h3>			
+		<ui:repeat var="current" value="#{airportFacadeBean.getAirlines()}">
+			| <h:outputText value="#{current.name}" /> |
 		</ui:repeat>
 		
 		<br/>
 		<h3 style="display: inline">Airplane types:  </h3>			
 		<ui:repeat var="current" value="#{airportFacadeBean.getAirplaneTypes()}">
 			| <h:outputText value="#{current.name}" /> |
+		</ui:repeat>
+		
+		<br/>
+		<h3 style="display: inline">IN_QUEUE:  </h3>			
+		<ui:repeat var="current" value="#{airportFacadeBean.getQueue()}">
+			| <h:outputText value="#{current.airplaneId}" /> |
 		</ui:repeat>
 		
 	</h:body>
