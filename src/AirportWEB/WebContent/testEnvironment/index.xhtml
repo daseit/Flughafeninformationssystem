@@ -34,6 +34,8 @@
 			Airline name: <h:inputText value="#{airportFacadeBean.addAirplaneAirlineName}"/>
 			Flight controller id: <h:inputText value="#{airportFacadeBean.flightControllerId}"/>
 			Name: <h:inputText value="#{airportFacadeBean.airplaneId}"/>
+			Estimated landing time: date<h:inputText value="#{airportFacadeBean.estimatedLandingDate}"/> time<h:inputText value="#{airportFacadeBean.estimatedLandingTime}"/>
+			Runway id: <h:inputText value="#{airportFacadeBean.addAirplaneRunwayId}"/>
 			<h:commandButton action="#{airportFacadeBean.registerAirplane}" value="register airplane"/>
 		</h:form>
 		

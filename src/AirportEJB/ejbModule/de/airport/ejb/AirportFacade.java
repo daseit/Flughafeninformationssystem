@@ -170,6 +170,27 @@ public class AirportFacade {
 		
 	}
 	
+	/**
+	 * Set estimated landing time for airplane.
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 * @param airplaneId
+	 */
+	public void setEstimatedLandingTime(String airplaneId, java.sql.Timestamp estimatedLandingTime) {
+		
+		// write to database
+		Query q = em.createQuery("update airplane set estimatedLandingTime = '" + estimatedLandingTime + "'" +
+							" where id = '" + airplaneId + "'");
+		int updateCnt = q.executeUpdate();
+		
+		if(updateCnt <= 0) {
+			System.out.println("[AirportFacade][setEstimatedLandingTime] Error: Set estimated landing time " +
+								estimatedLandingTime + " failed! No database update.");
+		}else{
+			System.out.println("[AirportFacade][setEstimatedLandingTime] Set estimated landing time for airplane " + airplaneId + " to " + estimatedLandingTime);
+		}
+		
+	}
+	
 	// airline
 	/**
 	 * Add a new airline to the system. (Requirement 11405)
@@ -217,7 +238,7 @@ public class AirportFacade {
 		}
 	}
 	
-	// airplain type
+	// airplane type
 	/**
 	 * Add a new airplane type to the system.
 	 * @author Benjamin Rupp <beruit01@hs-essingen.de>

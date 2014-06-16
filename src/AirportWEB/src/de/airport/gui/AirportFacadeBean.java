@@ -19,10 +19,16 @@ public class AirportFacadeBean {
 	
 	// -------- parameters ---------------
 	// register new airplane
+	private String airplaneId;
 	private String airplaneTypeName;
 	private String addAirplaneAirlineName;
 	private int flightControllerId;
-	private String airplaneId;
+	private String estimatedLandingDate;
+	private String estimatedLandingTime;
+	private int addAirplaneRunwayId;
+	
+	private String actualLandingDate;
+	private String actualLandingTime;
 	
 	// add new airline
 	private String airlineName;
@@ -70,22 +76,12 @@ public class AirportFacadeBean {
 		// add airplane to system
 		facade.addAirplane(this.airplaneTypeName, this.addAirplaneAirlineName, this.flightControllerId, this.airplaneId);
 		
-		// reserve runway
-		Date date = null;
-		try {
-			// parse date
-			date = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.GERMAN).parse(this.runwayReservationStartDate + " " + this.runwayReservationStartTime);			
-			java.sql.Timestamp sqlDate = new java.sql.Timestamp(date.getTime());
-			
-			// delegate
-			facade.reserveRunway(this.runwayId, sqlDate, this.airplaneId);
-		
-		} catch (ParseException e) {
-			System.out.println("[AirportFacadeBean][registerAirplane] Cannot parse date " + this.runwayReservationStartDate + " " + this.runwayReservationStartTime);
-		}
+		// reserve runway	
+		java.sql.Timestamp estTimestamp = parseStringToSQLTimestamp(this.estimatedLandingDate + " " + this.estimatedLandingTime);
+		facade.reserveRunway(this.addAirplaneRunwayId, estTimestamp, this.airplaneId);
 		
 		// add estimated date and time
-		// TODO: Needs implemented actual and estimated landing time. (issue #3)
+		facade.setEstimatedLandingTime(this.airplaneId, estTimestamp);
 		
 		return "";
 	}
@@ -262,6 +258,28 @@ public class AirportFacadeBean {
 		return "";
 	}
 	
+	/**
+	 * Parse given String with format dd.MM.yyyy HH:mm to SQL timestamp.
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 * @param str Date string with format dd.MM.yyyy HH:mm
+	 * @return SQL date of date string.
+	 */
+	private java.sql.Timestamp parseStringToSQLTimestamp(String str) {
+		
+		Date date;
+		java.sql.Timestamp sqlDate = null;
+		try {
+			
+			date = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.GERMAN).parse(str);
+			sqlDate = new java.sql.Timestamp(date.getTime());
+			
+		} catch (ParseException e) {
+			System.out.println("[AirportFacadeBean][parseStringToDate] Can not parse the following string to a SQL date: " + str);
+			e.printStackTrace();
+		}
+		
+		return sqlDate;
+	}
 	
 	// TESTING ONLY AREA!
 	// TODO: Remove these methods!
@@ -444,6 +462,36 @@ public class AirportFacadeBean {
 	}
 	public void setNextStateAirplaneId(String nextStateAirplaneId) {
 		this.nextStateAirplaneId = nextStateAirplaneId;
+	}
+	public String getEstimatedLandingTime() {
+		return estimatedLandingTime;
+	}
+	public void setEstimatedLandingTime(String estimatedLandingTime) {
+		this.estimatedLandingTime = estimatedLandingTime;
+	}
+	public String getActualLandingTime() {
+		return actualLandingTime;
+	}
+	public void setActualLandingTime(String actualLandingTime) {
+		this.actualLandingTime = actualLandingTime;
+	}
+	public String getEstimatedLandingDate() {
+		return estimatedLandingDate;
+	}
+	public void setEstimatedLandingDate(String estimatedLandingDate) {
+		this.estimatedLandingDate = estimatedLandingDate;
+	}
+	public String getActualLandingDate() {
+		return actualLandingDate;
+	}
+	public void setActualLandingDate(String actualLandingDate) {
+		this.actualLandingDate = actualLandingDate;
+	}
+	public int getAddAirplaneRunwayId() {
+		return addAirplaneRunwayId;
+	}
+	public void setAddAirplaneRunwayId(int addAirplaneRunwayId) {
+		this.addAirplaneRunwayId = addAirplaneRunwayId;
 	}
 	
 }
