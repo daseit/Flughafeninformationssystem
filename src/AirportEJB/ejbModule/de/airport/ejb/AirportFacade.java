@@ -1,6 +1,7 @@
 package de.airport.ejb;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -39,6 +40,8 @@ public class AirportFacade {
 		Airplane airplane = new Airplane();
 		airplane.setState(Airplane.State.IN_APPROACH);
 		
+		// id		
+		airplane.setAirplaneId(id);
 		
 		// get objects by id
 		Query qAirplaneType = em.createQuery("select e from airplaneType e where e.name = '" + airplaneTypeName + "'");
@@ -71,9 +74,6 @@ public class AirportFacade {
 			System.out.println("[AirportFacade][addAirplane] Error: No flight controller found! (flight controller id: " + flightControllerId + ")");
 			return;
 		}
-		
-		// id
-		airplane.setAirplaneId(id);
 		
 		
 		// write to database
@@ -131,6 +131,18 @@ public class AirportFacade {
 		
 	}
 	
+	/**
+	 * Return all airplen objects stored in the database.
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 * @return List with all airplane objects stored in the database.
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Airplane> getAirplanes() {
+		
+		Query query = em.createQuery("select e from airplane e order by e.id");
+		return query.getResultList();
+		
+	}
 	/**
 	 * A method to simulate the 5 different states of an airplane. When called, it set the next status of the airplane.
 	 * @author Benjamin Rupp <beruit01@hs-essingen.de>

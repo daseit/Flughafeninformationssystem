@@ -3,6 +3,7 @@ package de.airport.gui;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
@@ -74,6 +75,21 @@ public class AirportFacadeBean {
 	 * @return Empty String for JSF command button.
 	 */
 	public String registerAirplane() {
+		
+		// check id
+		List<Airplane> currentAirplanes = facade.getAirplanes();
+		
+		for(Iterator<Airplane> i = currentAirplanes.iterator(); i.hasNext(); ) {
+			
+			Airplane a = i.next();
+			if(a.getAirplaneId().equals(this.airplaneId)) {
+				
+				// id already exists
+				System.out.println("[AirportFacade][addAirplane] Error: Airplane id " + this.airplaneId + " already exists! Exit.");
+				return "";
+			}
+		}
+		
 		
 		// add airplane to system
 		facade.addAirplane(this.airplaneTypeName, this.addAirplaneAirlineName, this.flightControllerId, this.airplaneId);
