@@ -118,6 +118,20 @@ public class AirportFacade {
 	}
 	
 	/**
+	 * Return all airplane objects which are not landed yet.
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 * @return List with all airplane objects which are not landed yet.
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Airplane> getRegisteredAirplanes() {
+		
+		int landedState = Airplane.State.LANDED.ordinal();
+		Query query = em.createQuery("select e from airplane e where e.state != '" + landedState + "' order by e.id");
+		return query.getResultList();
+		
+	}
+	
+	/**
 	 * A method to simulate the 5 different states of an airplane. When called, it set the next status of the airplane.
 	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
 	 * @param airplaneId Unique airplane identifier.

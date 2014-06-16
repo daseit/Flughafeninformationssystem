@@ -124,6 +124,15 @@ public class AirportFacadeBean {
 		return "";
 	}
 	
+	/**
+	 * Return all airplane objects which are not landed yet.
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 * @return List with all airplane objects which are not landed yet.
+	 */
+	public List<Airplane> getRegisteredAirplanes() {
+		return facade.getRegisteredAirplanes();
+	}
+	
 
 	// TODO: remove this method! only for testing.
 	public String printAirplanes() {

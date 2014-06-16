@@ -99,6 +99,13 @@
 		<h:messages></h:messages>
 		
 		<hr/>
+		
+		<h3 style="display: inline">Registered airplanes:  </h3>			
+		<ui:repeat var="current" value="#{airportFacadeBean.getRegisteredAirplanes()}">
+			| <h:outputText value="#{current.airplaneId}" /> |
+		</ui:repeat>
+		
+		<br />
 		<h3 style="display: inline">Airlines:  </h3>			
 		<ui:repeat var="current" value="#{airportFacadeBean.getAirlines()}">
 			| <h:outputText value="#{current.name}" /> |
