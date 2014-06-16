@@ -23,7 +23,7 @@ public class Airline implements Serializable {
 	@JoinColumn(name="account_id")
 	private Account account;
 	
-	@OneToMany(mappedBy="airline")
+	@OneToMany(mappedBy="airline", cascade=CascadeType.DETACH)
 	private List<Airplane> airplanes = new ArrayList<Airplane>();
 	
 	public List<Airplane> getAirplanes() {
