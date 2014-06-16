@@ -32,7 +32,9 @@ public class AirportFacadeBean {
 	
 	// add new airline
 	private String airlineName;
-	private String airlineAddress;
+	private String airlineStreet;
+	private String airlineCity;
+	private String airlineCountry;
 	
 	// add new airplane type
 	private String addAirplaneTypeName;
@@ -136,7 +138,7 @@ public class AirportFacadeBean {
 	 * @return Empty string for JSF command button.
 	 */
 	public String addAirline() {
-		facade.addAirline(this.airlineName, this.airlineAddress);
+		facade.addAirline(this.airlineName, this.airlineStreet, this.airlineCity, this.airlineCountry);
 		
 		return "";
 	}
@@ -316,9 +318,9 @@ public class AirportFacadeBean {
 		facade.printParkingPositions();
 		
 		System.out.println("\nCreate airlines");
-		facade.addAirline("myAirline", "Stuttgart");
-		facade.addAirline("AirStefaan", "Hamburg");
-		facade.addAirline("Daniel Fly", "Paris");
+		facade.addAirline("myAirline", "Echterdingerstr. 18", "Stuttgart", "Germany");
+		facade.addAirline("AirStefaan", "Holstenstr. 1", "Hamburg", "Germany");
+		facade.addAirline("Daniel Fly", "Eifelturmgasse 4711", "Paris", "France");
 		facade.printAirlines();
 		
 		System.out.println("\nCreate airplane types");
@@ -374,12 +376,24 @@ public class AirportFacadeBean {
 	}
 	public void setAirlineName(String airlineName) {
 		this.airlineName = airlineName;
+	}	
+	public String getAirlineStreet() {
+		return airlineStreet;
 	}
-	public String getAirlineAddress() {
-		return airlineAddress;
+	public void setAirlineStreet(String airlineStreet) {
+		this.airlineStreet = airlineStreet;
 	}
-	public void setAirlineAddress(String airlineAddress) {
-		this.airlineAddress = airlineAddress;
+	public String getAirlineCity() {
+		return airlineCity;
+	}
+	public void setAirlineCity(String airlineCity) {
+		this.airlineCity = airlineCity;
+	}
+	public String getAirlineCountry() {
+		return airlineCountry;
+	}
+	public void setAirlineCountry(String airlineCountry) {
+		this.airlineCountry = airlineCountry;
 	}
 	public AirportFacade getFacade() {
 		return facade;

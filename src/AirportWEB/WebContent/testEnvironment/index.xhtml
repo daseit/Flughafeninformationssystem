@@ -18,7 +18,9 @@
 		<b>Airline</b>
 		<h:form>
 			Name: <h:inputText value="#{airportFacadeBean.airlineName}"/>
-			Adresse: <h:inputText value="#{airportFacadeBean.airlineAddress}"/>
+			Street: <h:inputText value="#{airportFacadeBean.airlineStreet}"/>
+			City: <h:inputText value="#{airportFacadeBean.airlineCity}"/>
+			Country: <h:inputText value="#{airportFacadeBean.airlineCountry}"/>
 			<h:commandButton action="#{airportFacadeBean.addAirline}" value="add airline"/>
 		</h:form>
 		

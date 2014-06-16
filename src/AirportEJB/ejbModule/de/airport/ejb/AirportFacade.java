@@ -196,9 +196,11 @@ public class AirportFacade {
 	 * Add a new airline to the system. (Requirement 11405)
 	 * @author Benjamin Rupp <beruit01@hs-esslingen.de>
 	 * @param name Airline name.
-	 * @param address Airline address.
+	 * @param street Airline street.
+	 * @param city Airline city.
+	 * @param country Airline country.
 	 */
-	public void addAirline(String name, String address) {
+	public void addAirline(String name, String street, String city, String country) {
 		
 		// create objects
 		Account account = new Account();
@@ -206,7 +208,7 @@ public class AirportFacade {
 		
 		// set airline properties
 		airline.setName(name);
-		airline.setAddress(address);
+		airline.setAddress(street + ":" + city + ":" + country);
 		airline.setAccount(account);
 		
 		// write account to db (must be done before writing the airline to the db)
