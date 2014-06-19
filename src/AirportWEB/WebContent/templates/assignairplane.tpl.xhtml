@@ -24,9 +24,9 @@
 					<label for="selectFlightName" class="col-sm-4 control-label">Flug</label>
 
 					<div class="col-sm-4">
-						<h:selectOneMenu class="form-control">
+						<h:selectOneMenu class="form-control" value="">
 							<!-- WIP should be another method (instead of Queue) -->
-							<f:selectItems value="#{airportFacadeBean.queue}" var="Airplane"
+							<f:selectItems value="#{airportFacadeBean.registeredAirplanes}" var="Airplane"
 								itemValue="#{Airplane.airplaneId}"
 								itemLabel="#{Airplane.airplaneId}" />
 						</h:selectOneMenu>
@@ -41,9 +41,9 @@
 					<label for="selectRunway" class="col-sm-4 control-label">Landebahn</label>
 
 					<div class="col-sm-4">
-						<h:selectOneMenu class="form-control">
+						<h:selectOneMenu class="form-control"  value="#">
 							<f:selectItems value="#{airportFacadeBean.runways}" var="Runway"
-								itemValue="#{Runway.id}" itemLabel="#{Runway.id}" />
+								itemValue="#{Runway.id}" itemLabel="#{Runway.id}"  />
 						</h:selectOneMenu>
 					</div>
 

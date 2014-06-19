@@ -16,10 +16,10 @@
 			<div class="panel-body">
 				<div class="row">
 
-					<label for="inputFlightName" class="col-sm-4 control-label">Flugzeugname</label>
+					<label class="col-sm-4 control-label">Flugzeugname</label>
 
 					<div class="col-sm-4">
-						<h:inputText class="form-control" id="inputFlightName"
+						<h:inputText class="form-control"
 							placeholder="" value="#{airportFacadeBean.airplaneId}" />
 					</div>
 
@@ -29,9 +29,9 @@
 				<!-- Airplane Type -->
 				<div class="row">
 
-					<label for="inputFlightName" class="col-sm-4 control-label">Flugzeugtyp</label>
+					<label class="col-sm-4 control-label">Flugzeugtyp</label>
 					<div class="col-sm-4">
-						<h:selectOneMenu class="form-control">
+						<h:selectOneMenu class="form-control" value="#{airportFacadeBean.airplaneTypeName}" >
 							<f:selectItems value="#{airportFacadeBean.airplaneTypes}"
 								var="AirplaneType" itemValue="#{AirplaneType.name}"
 								itemLabel="#{AirplaneType.name}" />
@@ -90,10 +90,10 @@
 
 					<label for="selectAirline" class="col-sm-4 control-label">Luftfahrtgesellschaft</label>
 					<div class="col-sm-4">
-						<h:selectOneMenu class="form-control">
-							<f:selectItems value="#{airportFacadeBean.airplaneTypes}"
-								var="AirplaneType" itemValue="#{AirplaneType.name}"
-								itemLabel="#{AirplaneType.name}" />
+						<h:selectOneMenu class="form-control" value="#{airportFacadeBean.addAirplaneAirlineName}" >
+							<f:selectItems value="#{airportFacadeBean.airlines}"
+								var="Airline" itemValue="#{Airline.name}"
+								itemLabel="#{Airline.name}" />
 						</h:selectOneMenu>
 					</div>
 
@@ -130,7 +130,7 @@
 												class="col-sm-6 control-label">Straße</label>
 											<div class="col-sm-6">
 												<h:inputText class="form-control" id="inputAirlineStreet"
-													value="#{airportFacadeBean.airlineAddress}" />
+													value="#{airportFacadeBean.airlineStreet}" />
 											</div>
 										</div>
 
@@ -138,7 +138,7 @@
 											<label for="inputAirlineCity" class="col-sm-6 control-label">Stadt</label>
 											<div class="col-sm-6">
 												<h:inputText class="form-control" id="inputAirlineCity"
-													value="#{airportFacadeBean.airlineAddress}" />
+													value="#{airportFacadeBean.airlineCity}" />
 											</div>
 										</div>
 
@@ -147,7 +147,7 @@
 												class="col-sm-6 control-label">Land</label>
 											<div class="col-sm-6">
 												<h:inputText class="form-control" id="inputAirlineCountry"
-													value="#{airportFacadeBean.airlineAddress}" />
+													value="#{airportFacadeBean.airlineCountry}" />
 											</div>
 										</div>
 									</div>
@@ -161,7 +161,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> 
 
 
 				<!-- Set estimated time -->
@@ -173,7 +173,7 @@
 							<div class="input-append date datepicker "
 								style="float: left; width: 45%" data-date-format="dd.mm.yyyy">
 								<h:inputText class="input-medium form-control"
-									value="#{airportFacadeBean.runwayReservationStartDate}" />
+									value="#{airportFacadeBean.estimatedLandingDate}" />
 								<span class="add-on"><i class="icon-th"></i></span>
 							</div>
 						</div>
@@ -181,7 +181,7 @@
 							<div class="input-group clockpicker"
 								style="float: right; width: 45%">
 								<h:inputText type="text" class="form-control"
-									value="#{airportFacadeBean.runwayReservationStartTime}" />
+									value="#{airportFacadeBean.estimatedLandingTime}" />
 								<span class="input-group-addon"> <span
 									class="glyphicon glyphicon-time"></span>
 								</span>
@@ -196,7 +196,7 @@
 					<label for="selectRunway" class="col-sm-4 control-label">Landebahn</label>
 
 					<div class="col-sm-4">
-						<h:selectOneMenu class="form-control">
+						<h:selectOneMenu class="form-control" value="#{airportFacadeBean.addAirplaneRunwayId}">
 							<f:selectItems value="#{airportFacadeBean.runways}" var="Runway"
 								itemValue="#{Runway.id}" itemLabel="#{Runway.id}" />
 						</h:selectOneMenu>

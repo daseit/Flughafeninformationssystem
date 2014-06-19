@@ -23,7 +23,7 @@ public class AirportFacadeBean {
 	private String airplaneId;
 	private String airplaneTypeName;
 	private String addAirplaneAirlineName;
-	private int flightControllerId;
+	private int flightControllerId=1;
 	private String estimatedLandingDate;
 	private String estimatedLandingTime;
 	private int addAirplaneRunwayId;
