@@ -132,6 +132,22 @@ public class AirportFacade {
 	}
 	
 	/**
+	 * Return all airplane objects which have the state ACCEPTED or LANDED.
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 * @return List with all airplane objects which have the state ACCEPTED or LANDED.
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Airplane> getSelectableAirplanes() {
+		
+		int acceptedState = Airplane.State.ACCEPTED.ordinal();
+		int landedState = Airplane.State.LANDED.ordinal();
+		
+		Query query = em.createQuery("select e from airplane e where e.state = '" + acceptedState + "' or e.state = '" + landedState + "' order by e.id");
+		return query.getResultList();
+		
+	}
+	
+	/**
 	 * Return all airplen objects stored in the database.
 	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
 	 * @return List with all airplane objects stored in the database.

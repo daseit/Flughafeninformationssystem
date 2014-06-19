@@ -161,6 +161,15 @@ public class AirportFacadeBean {
 	}
 	
 	/**
+	 * Return all airplane objects which have the state ACCEPTED or LANDED.
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 * @return List with all airplane objects which have the state ACCEPTED or LANDED.
+	 */
+	public List<Airplane> getSelectableAirplanes() {
+		return facade.getSelectableAirplanes();
+	}
+	
+	/**
 	 * Add a new airline to the system.
 	 * Necessary values are stored in the AirportFacadeBean.
 	 * @author Benjamin Rupp <beruit01@hs-esslingen.de>

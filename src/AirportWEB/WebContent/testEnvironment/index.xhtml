@@ -116,6 +116,12 @@
 		</ui:repeat>
 		
 		<br />
+		<h3 style="display: inline">Selectable airplanes:  </h3>			
+		<ui:repeat var="current" value="#{airportFacadeBean.getSelectableAirplanes()}">
+			| <h:outputText value="#{current.airplaneId}" /> |
+		</ui:repeat>
+		
+		<br />
 		<h3 style="display: inline">Free runways:  </h3>			
 		<ui:repeat var="current" value="#{airportFacadeBean.getFreeRunways()}">
 			| <h:outputText value="#{current.id}" /> |
