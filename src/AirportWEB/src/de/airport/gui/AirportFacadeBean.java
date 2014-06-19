@@ -134,6 +134,11 @@ public class AirportFacadeBean {
 		facade.setActualLandingTime(this.acceptAirplaneAirplaneId, currentSqlTimestamp);
 		
 		// reserve runway
+		Runway prevRunway = facade.getAirplane(this.acceptAirplaneAirplaneId).getRunway();
+		
+		if(prevRunway != null) {			
+			facade.releaseRunway(prevRunway.getId());
+		}
 		facade.reserveRunway(this.acceptAirplaneRunwayId, currentSqlTimestamp, this.acceptAirplaneAirplaneId);
 		
 		return "";

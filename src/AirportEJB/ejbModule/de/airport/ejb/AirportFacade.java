@@ -82,41 +82,7 @@ public class AirportFacade {
 				" to airline " + airplane.getAirline().getName());
 		
 	}
-	
-	/**
-	 * Print current airplanes to console.
-	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
-	 */
-	@SuppressWarnings("unchecked")
-	public void printAirplanes() {
 		
-		Query q = em.createQuery("select e from airplane e order by e.id");
-		
-		System.out.println("\nAirplanes\n--------------------------------");
-		System.out.println("id \tairline \ttype \t\tcontroller \trunway \tparking \tstatus");
-		
-		for(Airplane a : (List<Airplane>) q.getResultList()) {
-			
-			System.out.print("#" + a.getAirplaneId() + "\t" + a.getAirline().getName() + "\t" + a.getAirplaneType().getName() + "\t" +
-								a.getFlightController().getId());
-			
-			if( a.getRunway() == null ) {
-				System.out.print("\t-");
-			}else{
-				System.out.print("\t" + a.getRunway().getId());
-			}
-			
-			if( a.getParkingPosition() == null ) {
-				System.out.print("\t-");
-			}else{
-				System.out.print("\t" + a.getParkingPosition().getId());
-			}
-				
-			System.out.println("\t\t" + a.getState() + "\n");
-			
-		}
-	}
-	
 	/**
 	 * Return all airplane objects which are not landed yet.
 	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
@@ -148,7 +114,26 @@ public class AirportFacade {
 	}
 	
 	/**
-	 * Return all airplen objects stored in the database.
+	 * Return the airplane with the given airplane id.
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 * @param airplaneId Unique airplane identifier.
+	 * @return The airplane with the given airplane id.
+	 */
+	public Airplane getAirplane(String airplaneId) {
+		
+		Airplane temp = null;
+		Query query = em.createQuery("select e from airplane e where e.id = '" + airplaneId + "'");
+		
+		if(query.getResultList().size() > 0) {
+			temp = (Airplane) query.getResultList().get(0);
+		}
+		
+		return temp;
+		
+	}
+	
+	/**
+	 * Return all airplane objects stored in the database.
 	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
 	 * @return List with all airplane objects stored in the database.
 	 */
@@ -188,10 +173,12 @@ public class AirportFacade {
 			
 			case LANDED:
 				newState = State.PARKING;
+				releaseRunway(getAirplane(airplaneId).getRunway().getId());
 				break;
 			
 			case PARKING:
 				newState = State.PARKING;
+				break;
 			
 			}
 			
@@ -412,6 +399,25 @@ public class AirportFacade {
 	}
 	
 	/**
+	 * Return the runway with the given runway id.
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 * @param runwayId Unique runway identifier.
+	 * @return The runway with the given runway id.
+	 */
+	public Runway getRunway(int runwayId) {
+		
+		Runway temp = null;
+		Query query = em.createQuery("select e from runway e where e.id = '" + runwayId + "'");
+		
+		if(query.getResultList().size() > 0) {
+			temp = (Runway) query.getResultList().get(0);
+		}
+		
+		return temp;
+		
+	}
+	
+	/**
 	 * Return all free runways.
 	 * @author Benjamin Rupp <beruit01@hs-esslingen.de>
 	 * @return List with all free runways.
@@ -444,6 +450,16 @@ public class AirportFacade {
 								runwayId + " failed! No database update.");
 		}
 		
+		// modify airplane object in database
+		Query qAirplane = em.createQuery("update airplane set runway = '" + runwayId + "'" +
+						" where id = '" + airplaneId + "'");
+		int updateCnt2 = qAirplane.executeUpdate();
+		
+		if(updateCnt2 <= 0) {
+		System.out.println("[AirportFacade][reserveRunway] Error: Set runway " +
+							runwayId + " on airplane " + airplaneId + " failed! No database update.");
+		}
+		
 	}
 	
 	/**
@@ -453,12 +469,20 @@ public class AirportFacade {
 	 */
 	public void releaseRunway(int runwayId) {
 		
-		Query q = em.createQuery("update runway set airplane = null, reservationTimeStart = null, " +
+		String airplaneId = getRunway(runwayId).getAirplane().getAirplaneId();
+		
+		Query qRunway = em.createQuery("update runway set airplane = null, reservationTimeStart = null, " +
 									"reservationTimeEnd = null where id = '" + runwayId + "'");
 		
-		if(q.executeUpdate() <= 0) {
+		Query qAirplane = em.createQuery("update airplane set runway = null where id = '" + airplaneId + "'");
+		
+		if(qRunway.executeUpdate() <= 0) {
 			System.out.println("[AirportFacade][releaseRunway] Error: Release runway " +
 					runwayId + " failed! No database update.");
+		}
+		if(qAirplane.executeUpdate() <= 0) {
+			System.out.println("[AirportFacade][releaseRunway] Error: Remove runway " +
+					runwayId + " from airplane " + airplaneId + " failed! No database update.");
 		}
 		
 	}
@@ -654,5 +678,33 @@ public class AirportFacade {
 		
 		return "";
 	}
-
+	@SuppressWarnings("unchecked")
+	public void printAirplanes() {
+		
+		Query q = em.createQuery("select e from airplane e order by e.id");
+		
+		System.out.println("\nAirplanes\n--------------------------------");
+		System.out.println("id \tairline \ttype \t\tcontroller \trunway \tparking \tstatus");
+		
+		for(Airplane a : (List<Airplane>) q.getResultList()) {
+			
+			System.out.print("#" + a.getAirplaneId() + "\t" + a.getAirline().getName() + "\t" + a.getAirplaneType().getName() + "\t" +
+								a.getFlightController().getId());
+			
+			if( a.getRunway() == null ) {
+				System.out.print("\t-");
+			}else{
+				System.out.print("\t" + a.getRunway().getId());
+			}
+			
+			if( a.getParkingPosition() == null ) {
+				System.out.print("\t-");
+			}else{
+				System.out.print("\t" + a.getParkingPosition().getId());
+			}
+				
+			System.out.println("\t\t" + a.getState() + "\n");
+			
+		}
+	}
 }
