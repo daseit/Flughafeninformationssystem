@@ -1,5 +1,6 @@
 package de.airport.gui;
 
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,8 +37,6 @@ public class AirportFacadeBean {
 	private String acceptAirplaneParkingPositionStartTime;
 	private String acceptAirplaneParkingPositionEndDate;
 	private String acceptAirplaneParkingPositionEndTime;
-	private String actualLandingDate;
-	private String actualLandingTime;
 	
 	// add new airline
 	private String airlineName;
@@ -130,8 +129,12 @@ public class AirportFacadeBean {
 		// set airplane state to ACCEPTED
 		facade.setAirplaneState(this.acceptAirplaneAirplaneId, Airplane.State.ACCEPTED);
 		
-		// TODO: runway stuff
-		// TODO: actual landing time
+		// set actual landing time
+		java.sql.Timestamp currentSqlTimestamp = new java.sql.Timestamp(new Date().getTime());
+		facade.setActualLandingTime(this.acceptAirplaneAirplaneId, currentSqlTimestamp);
+		
+		// reserve runway
+		facade.reserveRunway(this.acceptAirplaneRunwayId, currentSqlTimestamp, this.acceptAirplaneAirplaneId);
 		
 		return "";
 	}
@@ -530,23 +533,11 @@ public class AirportFacadeBean {
 	public void setEstimatedLandingTime(String estimatedLandingTime) {
 		this.estimatedLandingTime = estimatedLandingTime;
 	}
-	public String getActualLandingTime() {
-		return actualLandingTime;
-	}
-	public void setActualLandingTime(String actualLandingTime) {
-		this.actualLandingTime = actualLandingTime;
-	}
 	public String getEstimatedLandingDate() {
 		return estimatedLandingDate;
 	}
 	public void setEstimatedLandingDate(String estimatedLandingDate) {
 		this.estimatedLandingDate = estimatedLandingDate;
-	}
-	public String getActualLandingDate() {
-		return actualLandingDate;
-	}
-	public void setActualLandingDate(String actualLandingDate) {
-		this.actualLandingDate = actualLandingDate;
 	}
 	public int getAddAirplaneRunwayId() {
 		return addAirplaneRunwayId;

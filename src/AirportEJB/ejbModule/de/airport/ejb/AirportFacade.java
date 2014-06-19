@@ -219,6 +219,27 @@ public class AirportFacade {
 	}
 	
 	/**
+	 * Set actual landing time for airplane.
+	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
+	 * @param airplaneId
+	 */
+	public void setActualLandingTime(String airplaneId, java.sql.Timestamp actualLandingTime) {
+		
+		// write to database
+		Query q = em.createQuery("update airplane set actualLandingTime = '" + actualLandingTime + "'" +
+							" where id = '" + airplaneId + "'");
+		int updateCnt = q.executeUpdate();
+		
+		if(updateCnt <= 0) {
+			System.out.println("[AirportFacade][setActualLandingTime] Error: Set actual landing time " +
+					actualLandingTime + " failed! No database update.");
+		}else{
+			System.out.println("[AirportFacade][setActualLandingTime] Set actual landing time for airplane " + airplaneId + " to " + actualLandingTime);
+		}
+		
+	}
+	
+	/**
 	 * Set a airplanes state.
 	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
 	 * @param airplaneId Unique airplane identifier.
