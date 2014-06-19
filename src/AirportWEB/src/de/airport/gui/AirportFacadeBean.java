@@ -28,6 +28,14 @@ public class AirportFacadeBean {
 	private String estimatedLandingTime;
 	private int addAirplaneRunwayId;
 	
+	// accept airplane
+	private String acceptAirplaneAirplaneId;
+	private int acceptAirplaneRunwayId;
+	private int acceptAirplaneParkingPositionId;
+	private String acceptAirplaneParkingPositionStartDate;
+	private String acceptAirplaneParkingPositionStartTime;
+	private String acceptAirplaneParkingPositionEndDate;
+	private String acceptAirplaneParkingPositionEndTime;
 	private String actualLandingDate;
 	private String actualLandingTime;
 	
@@ -51,6 +59,8 @@ public class AirportFacadeBean {
 	private String parkingPositionAirplaneId;
 	private String parkingPositionReservationStartDate;
 	private String parkingPositionReservationStartTime;
+	private String parkingPositionReservationEndDate;
+	private String parkingPositionReservationEndTime;
 	
 	// order queue
 	private String orderQueueAirplaneId;
@@ -111,14 +121,17 @@ public class AirportFacadeBean {
 	 */
 	public String acceptAirplane() {
 		
-		// reserve parking position
-		Date date = null;
-	
-		// parse date			
-		java.sql.Timestamp sqlDate = parseStringToSQLTimestamp(this.parkingPositionReservationStartDate + " " + this.parkingPositionReservationStartTime);
+		// reserve parking position		
+		java.sql.Timestamp sqlDateStart = parseStringToSQLTimestamp(this.acceptAirplaneParkingPositionStartDate + " " + this.acceptAirplaneParkingPositionStartTime);
+		java.sql.Timestamp sqlDateEnd = parseStringToSQLTimestamp(this.acceptAirplaneParkingPositionEndDate + " " + this.acceptAirplaneParkingPositionEndTime);
 		
-		// delegate
-		facade.reserveParkingPosition(this.parkingPositionId, sqlDate, this.parkingPositionAirplaneId);
+		facade.reserveParkingPosition(this.acceptAirplaneParkingPositionId, sqlDateStart, sqlDateEnd, this.acceptAirplaneAirplaneId);
+		
+		// set airplane state to ACCEPTED
+		facade.setAirplaneState(this.acceptAirplaneAirplaneId, Airplane.State.ACCEPTED);
+		
+		// TODO: runway stuff
+		// TODO: actual landing time
 		
 		return "";
 	}
@@ -144,13 +157,6 @@ public class AirportFacadeBean {
 		return facade.getRegisteredAirplanes();
 	}
 	
-
-	// TODO: remove this method! only for testing.
-	public String printAirplanes() {
-		facade.printAirplanes();
-		return "";
-	}
-	
 	/**
 	 * Add a new airline to the system.
 	 * Necessary values are stored in the AirportFacadeBean.
@@ -162,6 +168,7 @@ public class AirportFacadeBean {
 		
 		return "";
 	}
+	
 	/**
 	 * Return all airline objects from the database.
 	 * @author Benjamin Rupp <beruit01@hs-esslingen.de>
@@ -174,16 +181,6 @@ public class AirportFacadeBean {
 	}
 	
 	/**
-	 * Add 4 runways to database.
-	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
-	 * @return Empty string for JSF command button.
-	 */
-	public String addRunways() {
-		facade.addRunways();
-		return "";
-	}
-	
-	/**
 	 * Return all runways objects from the database.
 	 * @author Benjamin Rupp <beruit01@hs-esslingen.de>
 	 * @return List with all runway objects stored in the database.
@@ -193,6 +190,7 @@ public class AirportFacadeBean {
 		return facade.getRunways();
 		
 	}
+	
 	/**
 	 * Return all free runways.
 	 * @author Benjamin Rupp <beruit01@hs-esslingen.de>
@@ -208,8 +206,6 @@ public class AirportFacadeBean {
 	 * @return Empty string for JSF command button.
 	 */
 	public String reserveRunway() {
-		
-		Date date = null;
 		
 		// parse date			
 		java.sql.Timestamp sqlDate = parseStringToSQLTimestamp(this.runwayReservationStartDate + " " + this.runwayReservationStartTime);
@@ -230,6 +226,7 @@ public class AirportFacadeBean {
 		return facade.getParkingPositions();
 		
 	}
+	
 	/**
 	 * Return all free parking positions.
 	 * @author Benjamin Rupp <beruit01@hs-esslingen.de>
@@ -249,6 +246,7 @@ public class AirportFacadeBean {
 		
 		return "";
 	}
+	
 	/**
 	 * Return a list of all airplanes in state IN_QUEUE.
 	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
@@ -267,6 +265,7 @@ public class AirportFacadeBean {
 		facade.addAirplaneType(this.addAirplaneTypeName);
 		return "";
 	}
+	
 	/**
 	 * Return all airplane type objects from the database.
 	 * @author Benjamin Rupp <beruit01@hs-esslingen.de>
@@ -300,6 +299,7 @@ public class AirportFacadeBean {
 		return "";
 	}
 	
+	// private stuff
 	/**
 	 * Parse given String with format dd.MM.yyyy HH:mm to SQL timestamp.
 	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
@@ -323,13 +323,9 @@ public class AirportFacadeBean {
 		return sqlDate;
 	}
 	
+	
 	// TESTING ONLY AREA!
 	// TODO: Remove these methods!
-	/**
-	 * Init demo site.
-	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
-	 * @return Empty string for JSF command button.
-	 */
 	public String init() {
 		
 		System.out.println("\nInit demo page..\n\n");
@@ -340,11 +336,11 @@ public class AirportFacadeBean {
 		facade.printFlightController();
 		
 		System.out.println("\nCreate runways..");
-		facade.addRunways();
+		facade.addRunways(4);
 		facade.printRunways();
 		
 		System.out.println("\nCreate parking positions..");
-		facade.addParkingPositions();
+		facade.addParkingPositions(10);
 		facade.printParkingPositions();
 		
 		System.out.println("\nCreate airlines");
@@ -362,11 +358,6 @@ public class AirportFacadeBean {
 		facade.addAirplane("Boeing 747", "AirStefaan", 2, "HS4711");
 		return "";
 	}
-	/**
-	 * Print info.
-	 * @author Benjamin Rupp <beruit01@hs-essingen.de>
-	 * @return Empty string for JSF command button.
-	 */
 	public String printInfo() {
 		
 		System.out.println("\n\nINFO:\n------------------");
@@ -379,8 +370,10 @@ public class AirportFacadeBean {
 		
 		return "";
 	}
-	
-	
+	public String printAirplanes() {
+		facade.printAirplanes();
+		return "";
+	}
 	
 	// getters and setters
 	public String getAirlineName() {
@@ -505,6 +498,20 @@ public class AirportFacadeBean {
 			String parkingPositionReservationStartTime) {
 		this.parkingPositionReservationStartTime = parkingPositionReservationStartTime;
 	}
+	public String getParkingPositionReservationEndDate() {
+		return parkingPositionReservationEndDate;
+	}
+	public void setParkingPositionReservationEndDate(
+			String parkingPositionReservationEndDate) {
+		this.parkingPositionReservationEndDate = parkingPositionReservationEndDate;
+	}
+	public String getParkingPositionReservationEndTime() {
+		return parkingPositionReservationEndTime;
+	}
+	public void setParkingPositionReservationEndTime(
+			String parkingPositionReservationEndTime) {
+		this.parkingPositionReservationEndTime = parkingPositionReservationEndTime;
+	}
 	public String getAddAirplaneTypeName() {
 		return addAirplaneTypeName;
 	}
@@ -547,5 +554,51 @@ public class AirportFacadeBean {
 	public void setAddAirplaneRunwayId(int addAirplaneRunwayId) {
 		this.addAirplaneRunwayId = addAirplaneRunwayId;
 	}
-	
+	public String getAcceptAirplaneAirplaneId() {
+		return acceptAirplaneAirplaneId;
+	}
+	public void setAcceptAirplaneAirplaneId(String acceptAirplaneAirplaneId) {
+		this.acceptAirplaneAirplaneId = acceptAirplaneAirplaneId;
+	}
+	public int getAcceptAirplaneRunwayId() {
+		return acceptAirplaneRunwayId;
+	}
+	public void setAcceptAirplaneRunwayId(int acceptAirplaneRunwayId) {
+		this.acceptAirplaneRunwayId = acceptAirplaneRunwayId;
+	}
+	public int getAcceptAirplaneParkingPositionId() {
+		return acceptAirplaneParkingPositionId;
+	}
+	public void setAcceptAirplaneParkingPositionId(
+			int acceptAirplaneParkingPositionId) {
+		this.acceptAirplaneParkingPositionId = acceptAirplaneParkingPositionId;
+	}
+	public String getAcceptAirplaneParkingPositionStartDate() {
+		return acceptAirplaneParkingPositionStartDate;
+	}
+	public void setAcceptAirplaneParkingPositionStartDate(
+			String acceptAirplaneParkingPositionStartDate) {
+		this.acceptAirplaneParkingPositionStartDate = acceptAirplaneParkingPositionStartDate;
+	}
+	public String getAcceptAirplaneParkingPositionStartTime() {
+		return acceptAirplaneParkingPositionStartTime;
+	}
+	public void setAcceptAirplaneParkingPositionStartTime(
+			String acceptAirplaneParkingPositionStartTime) {
+		this.acceptAirplaneParkingPositionStartTime = acceptAirplaneParkingPositionStartTime;
+	}
+	public String getAcceptAirplaneParkingPositionEndDate() {
+		return acceptAirplaneParkingPositionEndDate;
+	}
+	public void setAcceptAirplaneParkingPositionEndDate(
+			String acceptAirplaneParkingPositionEndDate) {
+		this.acceptAirplaneParkingPositionEndDate = acceptAirplaneParkingPositionEndDate;
+	}
+	public String getAcceptAirplaneParkingPositionEndTime() {
+		return acceptAirplaneParkingPositionEndTime;
+	}
+	public void setAcceptAirplaneParkingPositionEndTime(
+			String acceptAirplaneParkingPositionEndTime) {
+		this.acceptAirplaneParkingPositionEndTime = acceptAirplaneParkingPositionEndTime;
+	}
 }

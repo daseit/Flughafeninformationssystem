@@ -57,7 +57,19 @@
 			Parking postion Id: <h:inputText value="#{airportFacadeBean.parkingPositionId}"/>
 			Airplane Id: <h:inputText value="#{airportFacadeBean.parkingPositionAirplaneId}"/>
 			Reservation start date: date<h:inputText value="#{airportFacadeBean.parkingPositionReservationStartDate}" /> time<h:inputText value="#{airportFacadeBean.parkingPositionReservationStartTime}" />
-			<h:commandButton action="#{airportFacadeBean.acceptAirplane}" value="reserve parking position" />
+			<h:commandButton action="#{airportFacadeBean.reserveRunway}" value="reserve parking position" />
+			
+		</h:form>
+		
+		<b>Accept Airplane</b>
+		<h:form>
+			
+			Airplane Id: <h:inputText value="#{airportFacadeBean.acceptAirplaneAirplaneId}"/>
+			Runway Id: <h:inputText value="#{airportFacadeBean.acceptAirplaneRunwayId}"/>
+			Parking Position: <h:inputText value="#{airportFacadeBean.acceptAirplaneParkingPositionId}"/>
+			Parking position reservation start date: date<h:inputText value="#{airportFacadeBean.acceptAirplaneParkingPositionStartDate}" /> time<h:inputText value="#{airportFacadeBean.acceptAirplaneParkingPositionStartTime}" />
+			Parking position reservation start date: date<h:inputText value="#{airportFacadeBean.acceptAirplaneParkingPositionEndDate}" /> time<h:inputText value="#{airportFacadeBean.acceptAirplaneParkingPositionEndTime}" />
+			<h:commandButton action="#{airportFacadeBean.acceptAirplane}" value="accept airplane" />
 			
 		</h:form>
 		
