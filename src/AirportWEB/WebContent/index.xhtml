@@ -76,7 +76,7 @@
 							<div class="col-sm-4">
 								<h:selectOneMenu class="form-control" value="#{airportFacadeBean.nextStateAirplaneId}">
 									<!-- WIP should be another method (instead of Queue) -->
-									<f:selectItems value="#{airportFacadeBean.registeredAirplanes}"
+									<f:selectItems value="#{airportFacadeBean.selectableAirplanes}"
 										var="Airplane" itemValue="#{Airplane.airplaneId}"
 										itemLabel="#{Airplane.airplaneId}" />
 								</h:selectOneMenu>

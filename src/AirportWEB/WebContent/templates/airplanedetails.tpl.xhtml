@@ -12,157 +12,161 @@
 		</h3>
 	</div>
 	<div id="collapseRegisterAirplane" class="panel-collapse collapse in">
+
+		<!-- Modal to add Types-->
+		<div class="modal fade" id="addAirplanetype" tabindex="-1"
+			role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">X</button>
+						<h4 class="modal-title" id="ModalLabel">Typ hinzufügen</h4>
+					</div>
+					
+					<h:form>
+						<div class="row">
+							<div class="modal-body">
+								<label class="col-sm-6 control-label">Name</label>
+								<div class="col-sm-6 ">
+									<h:inputText class="form-control"
+										value="#{airportFacadeBean.addAirplaneTypeName}" />
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Abbrechen</button>
+							<h:commandButton action="#{airportFacadeBean.addAirplaneType}"
+								class="btn btn-primary" value="Bestätigen" />
+						</div>
+					</h:form>
+				</div>
+			</div>
+		</div>
+
+		<!-- Modal to add airlines-->
+
+		<div class="modal fade" id="addAirplaneline" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">X</button>
+						<h4 class="modal-title" id="myModalLabel">Typ hinzufügen</h4>
+					</div>
+
+
+
+					<h:form>
+						<div class="row">
+							<div class="modal-body">
+								<div class="row">
+									<label for="inputAirlineName" class="col-sm-6 control-label">Name</label>
+									<div class="col-sm-6">
+										<h:inputText class="form-control" id="inputAirlineName"
+											value="#{airportFacadeBean.airlineName}" />
+									</div>
+								</div>
+
+								<div class="row">
+									<label for="inputAirlineStreet" class="col-sm-6 control-label">Straße</label>
+									<div class="col-sm-6">
+										<h:inputText class="form-control" id="inputAirlineStreet"
+											value="#{airportFacadeBean.airlineStreet}" />
+									</div>
+								</div>
+
+								<div class="row">
+									<label for="inputAirlineCity" class="col-sm-6 control-label">Stadt</label>
+									<div class="col-sm-6">
+										<h:inputText class="form-control" id="inputAirlineCity"
+											value="#{airportFacadeBean.airlineCity}" />
+									</div>
+								</div>
+
+								<div class="row">
+									<label for="inputAirlineCountry" class="col-sm-6 control-label">Land</label>
+									<div class="col-sm-6">
+										<h:inputText class="form-control" id="inputAirlineCountry"
+											value="#{airportFacadeBean.airlineCountry}" />
+									</div>
+								</div>
+
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Abbrechen</button>
+							<h:commandButton action="#{airportFacadeBean.addAirline}"
+								class="btn btn-primary" value="Bestätigen" />
+
+						</div>
+					</h:form>
+				</div>
+			</div>
+		</div>
+
+
 		<h:form>
+		
+		
+		
+		
 			<div class="panel-body">
+
+
+
 				<div class="row">
 
 					<label class="col-sm-4 control-label">Flugzeugname</label>
 
 					<div class="col-sm-4">
-						<h:inputText class="form-control"
-							placeholder="" value="#{airportFacadeBean.airplaneId}" />
+						<h:inputText class="form-control" placeholder=""
+							value="#{airportFacadeBean.airplaneId}" />
 					</div>
-
-
-
 				</div>
 				<!-- Airplane Type -->
 				<div class="row">
-
 					<label class="col-sm-4 control-label">Flugzeugtyp</label>
 					<div class="col-sm-4">
-						<h:selectOneMenu class="form-control" value="#{airportFacadeBean.airplaneTypeName}" >
+						<h:selectOneMenu class="form-control"
+							value="#{airportFacadeBean.airplaneTypeName}">
 							<f:selectItems value="#{airportFacadeBean.airplaneTypes}"
 								var="AirplaneType" itemValue="#{AirplaneType.name}"
 								itemLabel="#{AirplaneType.name}" />
 						</h:selectOneMenu>
 					</div>
-
 					<!-- Button trigger modal -->
-
 					<a class="col-sm-1 btn btn-default" data-toggle="modal"
 						data-target="#addAirplanetype">+</a>
 
 
-					<!-- Modal to add Types-->
-
-					<div class="modal fade" id="addAirplanetype" tabindex="-1"
-						role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal"
-										aria-hidden="true">X</button>
-									<h4 class="modal-title" id="myModalLabel">Typ hinzufügen</h4>
-								</div>
-
-								<h:form>
-									<div class="row">
-										<div class="modal-body">
 
 
 
-											<label for="inputAirplanetype" class="col-sm-6 control-label">Name</label>
-											<div class="col-sm-6 ">
-												<h:inputText class="form-control" id="inputAirplanetype"
-													value="#{airportFacadeBean.addAirplaneTypeName}" />
-											</div>
-
-										</div>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default"
-											data-dismiss="modal">Abbrechen</button>
-										<h:commandButton action="#{airportFacadeBean.addAirplaneType}"
-											class="btn btn-primary" value="Bestätigen" />
-
-									</div>
-								</h:form>
-							</div>
-						</div>
-					</div>
 				</div>
 
 
 				<!-- Airline -->
 				<div class="row">
-
-
-					<label for="selectAirline" class="col-sm-4 control-label">Luftfahrtgesellschaft</label>
+					<label class="col-sm-4 control-label">Fluglinie</label>
 					<div class="col-sm-4">
-						<h:selectOneMenu class="form-control" value="#{airportFacadeBean.addAirplaneAirlineName}" >
+						<h:selectOneMenu class="form-control"
+							value="#{airportFacadeBean.addAirplaneAirlineName}">
 							<f:selectItems value="#{airportFacadeBean.airlines}"
 								var="Airline" itemValue="#{Airline.name}"
 								itemLabel="#{Airline.name}" />
 						</h:selectOneMenu>
 					</div>
-
-
 					<!-- Button trigger modal -->
 					<a class="col-sm-1 btn btn-default" data-toggle="modal"
-						data-target="#addAirlinePopover">+</a>
+						data-target="#addAirplaneline">+</a>
 
 
-					<!-- Modal -->
-					<div class="modal fade" id="addAirlinePopover" tabindex="-1"
-						role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal"
-										aria-hidden="true">X</button>
-									<h4 class="modal-title" id="myModalLabel">Fluggesellschaft
-										hinzufügen</h4>
-								</div>
-								<h:form>
-									<div class="modal-body">
-										<div class="row">
-											<label for="inputAirlineName" class="col-sm-6 control-label">Name</label>
 
-											<div class="col-sm-6">
-												<h:inputText class="form-control" id="inputAirlineName"
-													value="#{airportFacadeBean.airlineName}" />
-											</div>
-										</div>
-
-										<div class="row">
-											<label for="inputAirlineStreet"
-												class="col-sm-6 control-label">Straße</label>
-											<div class="col-sm-6">
-												<h:inputText class="form-control" id="inputAirlineStreet"
-													value="#{airportFacadeBean.airlineStreet}" />
-											</div>
-										</div>
-
-										<div class="row">
-											<label for="inputAirlineCity" class="col-sm-6 control-label">Stadt</label>
-											<div class="col-sm-6">
-												<h:inputText class="form-control" id="inputAirlineCity"
-													value="#{airportFacadeBean.airlineCity}" />
-											</div>
-										</div>
-
-										<div class="row">
-											<label for="inputAirlineCountry"
-												class="col-sm-6 control-label">Land</label>
-											<div class="col-sm-6">
-												<h:inputText class="form-control" id="inputAirlineCountry"
-													value="#{airportFacadeBean.airlineCountry}" />
-											</div>
-										</div>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default"
-											data-dismiss="modal">Abbrechen</button>
-										<h:commandButton action="#{airportFacadeBean.addAirline}"
-											class="btn btn-primary" value="Bestätigen" />
-									</div>
-								</h:form>
-							</div>
-						</div>
-					</div>
-				</div> 
-
+				</div>
 
 				<!-- Set estimated time -->
 				<div class="row">
@@ -196,7 +200,8 @@
 					<label for="selectRunway" class="col-sm-4 control-label">Landebahn</label>
 
 					<div class="col-sm-4">
-						<h:selectOneMenu class="form-control" value="#{airportFacadeBean.addAirplaneRunwayId}">
+						<h:selectOneMenu class="form-control"
+							value="#{airportFacadeBean.addAirplaneRunwayId}">
 							<f:selectItems value="#{airportFacadeBean.runways}" var="Runway"
 								itemValue="#{Runway.id}" itemLabel="#{Runway.id}" />
 						</h:selectOneMenu>
