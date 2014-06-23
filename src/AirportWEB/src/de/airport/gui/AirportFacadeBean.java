@@ -299,7 +299,7 @@ public class AirportFacadeBean {
 	 */
 	public String cancelLanding() {
 		
-		facade.cancelLanding(this.cancelLandingAirplaneId);
+		facade.cancelLanding(this.acceptAirplaneAirplaneId);
 		
 		return "";
 	}
