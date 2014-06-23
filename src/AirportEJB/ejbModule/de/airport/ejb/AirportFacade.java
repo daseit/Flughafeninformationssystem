@@ -2,6 +2,8 @@ package de.airport.ejb;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -26,6 +28,52 @@ public class AirportFacade {
 	@PersistenceContext(unitName = "airport")
 	private EntityManager em;
 
+	// init system
+	public AirportFacade() {
+		
+		/*
+		Timer timer = new Timer();
+		
+		System.out.println("\n\n\n");
+		System.out.println("--------------------------------------------------------------------------------------------------");
+		System.out.println("---------- FLUGHAFENINFORMATIONSSYSTEM by Daniel Secker, Stefan Lutz and Benjamin Rupp -----------");
+		System.out.println("--------------------------------------------------------------------------------------------------");
+		
+		System.out.println("\nPrepare system to start..");
+		
+		timer.schedule(new TimerTask() {
+			
+			@Override
+			public void run() {
+				
+				System.out.println("\nCreate 4 runways..");
+				addRunways(4);
+				
+				System.out.println("\nCreate 10 parking positions..");
+				addParkingPositions(10);
+				
+				System.out.println("\nCreate 2 flight controller..");
+				addFlightController("Hans", "Maier", "hansi_maier", "geheim");
+				addFlightController("Gudrun", "Schmidt", "gundi", "geheim");
+				
+				System.out.println("\nCreate 3 airlines");
+				addAirline("myAirline", "Echterdingerstr. 18", "Stuttgart", "Germany");
+				addAirline("AirStefaan", "Holstenstr. 1", "Hamburg", "Germany");
+				addAirline("Daniel Fly", "Eifelturmgasse 4711", "Paris", "France");
+				
+				System.out.println("\nCreate 2 airplane types");
+				addAirplaneType("Boeing 747");
+				addAirplaneType("Airbus A380");
+				addAirplaneType("Aero Commander 500");
+				
+			}
+			
+		}, 2*1000);
+		*/
+		
+	}
+	
+	
 	// airplane
 	/**
 	 * Add a new airplane to the system. (Requirement 11400)
@@ -91,8 +139,8 @@ public class AirportFacade {
 	@SuppressWarnings("unchecked")
 	public List<Airplane> getRegisteredAirplanes() {
 		
-		int landedState = Airplane.State.LANDED.ordinal();
-		Query query = em.createQuery("select e from airplane e where e.state != '" + landedState + "' order by e.id");
+		int parkingState = Airplane.State.PARKING.ordinal();
+		Query query = em.createQuery("select e from airplane e where e.state != '" + parkingState + "' order by e.id");
 		return query.getResultList();
 		
 	}

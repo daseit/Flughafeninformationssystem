@@ -259,7 +259,7 @@ public class AirportFacadeBean {
 	 * @return Empty string for JSF command button.
 	 */
 	public String orderQueue() {
-		facade.orderQueue(this.orderQueueAirplaneId);
+		facade.orderQueue(this.acceptAirplaneAirplaneId);
 		
 		return "";
 	}
